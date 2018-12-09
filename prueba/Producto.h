@@ -53,7 +53,7 @@ public:
 	std::string VerClasificacion() const; ///< devuelve la localidad del Producto
 	std::string VerComposicion() const; ///< devuelve el telefono del Producto
 	std::string VerPresentacion() const; ///< devuelve la direccion de correo electronico del Producto
-	long long verCodigo() const;
+	long long VerCodigo() const;
 	float VerPrecio_di () const; ///< devuelve precio distribuidora
 	float VerPrecio_pr () const; ///< devuelve precio profesional
 	float VerPrecio_pu () const; ///< devuelve precio publico

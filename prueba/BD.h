@@ -63,7 +63,7 @@ public:
 	/// @brief Agrega un registro
 	void AgregarCliente(const Cliente &p);
 	void AgregarProducto(const Producto &p);
-	void AgregarPedido(const Pedido &p);
+	std::string AgregarPedido(Pedido &p);
 
 	/// @brief Devuelve un registro para ver o modificar
 	//Cliente &operator[](int i);

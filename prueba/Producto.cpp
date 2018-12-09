@@ -60,7 +60,7 @@ float Producto::VerPrecio_pu() const {
 	return precio_pu;
 }
 
-long long Producto::verCodigo() const {
+long long Producto::VerCodigo() const {
   return codigo;
 }
 
@@ -151,7 +151,7 @@ std::string Producto::ValidarDatos() {
 	if (composicion.size()>256) errores+="La composicion es demasiado largo\n";
 	if (presentacion.size()>256) errores+="La presentacion es demasiado largo\n";
 	if (stock<0 || stock>99999) errores+="stock debe estar entre 0 y 999999 \n";
-  if (codigo<0 || codigo>9999) errores+="Codigo debe estar entre 0 y 9999(cuatro digitos)\n";
+  if (codigo<999 || codigo>9999) errores+="Codigo debe tener cuatro digitos\n";
 	return errores;
 }
 

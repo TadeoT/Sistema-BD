@@ -4,60 +4,41 @@ using namespace std;
 
 int main (int argc, char *argv[]) {
 	BD baseDatos ("datosClientes.dat","datosProductos.dat","datosPedidos.dat");
-	cout<<baseDatos.CantidadDatos_cliente()<<endl;
+	/*cout<<baseDatos.CantidadDatos_cliente()<<endl;*/
+	cout<<"-------------CLIENTES---------------------"<<endl;    
 	for(int i=0;i<baseDatos.CantidadDatos_cliente();i++){
 		Cliente &p = baseDatos.VerCliente(i);
-		cout<<i<<" "<<p.VerApellido()<<", "<<p.VerNombre()<<endl;
+		cout<<i<<" "<<p.VerApellido()<<", "<<p.VerNombre()<<" Email: "<<p.VerEmail()<<" DNI: "<<p.VerDni()<<" Saldo: "<<p.VerSaldo()<<endl;
 	}
-	cout<<baseDatos.CantidadDatos_producto()<<endl;
+//	cout<<baseDatos.CantidadDatos_producto()<<endl;
+	cout<<"--------------PRODUCTOS------------------"<<endl;
 	for(int i=0;i<baseDatos.CantidadDatos_producto();i++){
 		Producto &p = baseDatos.VerProducto(i);
-		cout<<i<<" "<<p.VerMarca()<<", "<<p.VerNombre()<<" CODIGO: "<<p.verCodigo()<<endl;
+		cout<<i<<" "<<p.VerMarca()<<", "<<p.VerNombre()<<" CODIGO: "<<p.VerCodigo()<<" STOCK: "<<p.VerStock()<<endl;
 	}
-	cout<<"ESTE "<<baseDatos.CantidadDatos_pedido()<<endl;
-	for(int i=0;i<baseDatos.CantidadDatos_pedido();i++){
+	cout<<"--------------PEDIDOS--------------------"<<endl;
+	for(int i=baseDatos.CantidadDatos_pedido()-1;i>=0;i--){
 		Pedido &p = baseDatos.VerPedido(i);
-		cout<<i<<" "<<p.VerdniCliente()<<", "<<p.Vertotal()<<endl;
+		cout<<i<<" "<<"DNI CLIENTE: "<<p.VerdniCliente()<<" TOTAL: "<<p.Vertotal()<<" Deuda adquirir: "<<p.Verdeuda()<<" Cantidad: "<<p.VerCantidad()<<" Fecha: "<<p.Verdia()<<"/"<<p.Vermes()<<"/"<<p.Veranio()<<endl;
 	}
+	//string 	nombre="Carlos",apellido="Bilador",telefono="34255546609",email="bilardo@gmail.com",localidad="Bs AS",direccion="Pse Ganar";
+	//int dni=37571463;
+	//float saldo=-165.5;
+	//Cliente c(nombre,apellido,telefono,email,localidad,direccion,dni,saldo);
+	//baseDatos.AgregarCliente(c);
+	//baseDatos.Guardar_cliente();
+//	baseDatos.EliminarProducto(3);
+//	baseDatos.Guardar_producto();
 	
-	int DNI,dia,mes,anio;
-	float total,pagado,deuda;
-	long long codigoP;
-	cout<< "-DNI -CODIGOP -TOTAL -PAGADO -DEUDA -DIA -MES -AÑO "<<endl;
-	cin>>DNI;
-	cin>>codigoP
-		;
-	cin>>total;
-	cin>>pagado;
-	cin>>deuda;
-	cin>>dia;
-	cin>>mes;
-	cin>>anio;
-	Pedido pe1(DNI,codigoP,total,pagado,deuda,dia,mes,anio);
-	baseDatos.AgregarPedido(pe1);
-	baseDatos.Guardar_pedido();
-	
-	string marca,nombre,descripcion,clasificacion,composicion,presentacion;
-	long long codigo;
-	float precio_di,precio_pu;
-	int stock;
-	cout<<"-Marca -nombre -descripcion -clasificacion -composicion - presentacion -codigo -preciodistribuidora -precio publico -stock"<<endl;
-	getline(cin,marca);
-	getline(cin,nombre);
-	getline(cin,descripcion);
-	getline(cin,clasificacion);
-	getline(cin,composicion);
-	getline(cin,presentacion);
-	cin>>codigo;
-	cin>>precio_di;
-	cin>>precio_pu;
-	cin>>stock;
-	Producto p1(marca,nombre,descripcion,clasificacion,composicion,presentacion,codigo,precio_di,0,precio_pu,stock);
-	
-	if(p1.ValidarDatos()!=""){
-	baseDatos.AgregarProducto(p1);
-	baseDatos.Guardar_producto();
-	}
+//	
+//	int dniCliente=32648214,cantidad=3;
+//	long long codigoP=1001;
+//	float pagado=50;
+//	Pedido p1(dniCliente,codigoP,pagado,cantidad,1);
+//	cout<<baseDatos.AgregarPedido(p1)<<endl;;
+//	baseDatos.Guardar_pedido();
+//	baseDatos.Guardar_cliente();
+//	baseDatos.Guardar_producto();
 	
 	
 	return 0;
