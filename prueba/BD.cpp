@@ -100,12 +100,28 @@ int BD::CantidadDatos_pedido(){
 	return arregloPedido.size();
 }
 
-void BD::AgregarCliente(const Cliente &p) {
-	arregloCliente.push_back(p);
+std::string BD::AgregarCliente(const Cliente &p) {
+	int dni = p.VerDni();
+	auto it =find_if(arregloCliente.begin(),arregloCliente.end(),[&dni](const Cliente& c){ return c.VerDni() == dni;});
+
+	if(it == arregloCliente.end()){
+		arregloCliente.push_back(p);
+		return "Cliente Ingresado";
+	}else return "Ya existe el DNI ingresado";
 }
-void BD::AgregarProducto(const Producto &p){
+
+
+std::string BD::AgregarProducto(const Producto &p){
+	long long codigo = p.VerCodigo();
+	auto ut =find_if(arregloProducto.begin(),arregloProducto.end(),[&codigo](const Producto& p){ return p.VerCodigo() == codigo;});
+
+	if(ut == arregloProducto.end()){
 	arregloProducto.push_back(p);
+	return "Producto Ingresado";
+}else return "Ya existe el CODIGO ingresado";
 }
+
+
 std::string BD::AgregarPedido( Pedido &p){
 	//------------------VARIABLES BUSQUEDA-------------------------------
 	//declaro las variables que voy a usar
@@ -181,7 +197,7 @@ int BD::BuscarApellidoYNombre(std::string parte, int pos_desde) {
 	return NO_SE_ENCUENTRA;
 }
 
-void BD::Ordenar(CriterioOrden criterio) {
+void BD::OrdenarCliente(CriterioOrdenCliente criterio) {
 	switch (criterio) {
 	case ORDEN_APELLIDO_Y_NOMBRE:
 		sort(arregloCliente.begin(),arregloCliente.end(),criterio_comparacion_apellido_y_nombre);
@@ -197,6 +213,18 @@ void BD::Ordenar(CriterioOrden criterio) {
 		break;
 	};
 }
+
+void BD::OrdenarProducto(CriterioOrdenProducto criterio){
+	switch (criterio){
+		case ORDEN_MARCA:
+			sort (arregloProducto.begin(),arregloProducto.end(),criterio_comparacion_marca);
+			break;
+		case ORDEN_CODIGO:
+			sort (arregloProducto.begin(),arregloProducto.end(),criterio_comparacion_codigo);
+			break;
+	};
+}
+
 
 void BD::EliminarCliente(int i) {
 	arregloCliente.erase(arregloCliente.begin()+i);

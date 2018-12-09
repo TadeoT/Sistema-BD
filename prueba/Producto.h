@@ -23,16 +23,16 @@ class Producto {
 private:
 
 	// datos de un Producto
-	std::string marca;///< nombres del Producto
-	std::string nombre; ///< apellido del Producto
-	std::string descripcion; ///< telefono del Producto
-	std::string clasificacion; ///< direccion del Producto
-	std::string composicion; ///< localidad donde vive el Producto
-	std::string presentacion; ///< direccion de correo electronico del Producto
+	std::string marca;
+	std::string nombre;
+	std::string descripcion;
+	std::string clasificacion;
+	std::string composicion;
+	std::string presentacion;
   long long codigo;
-	float precio_di; ///< dia de la fecha de naciemiento
-	float precio_pr; ///< mes de la fecha de naciemiento
-	float precio_pu; ///< anio de la fecha de naciemiento
+	float precio_di;
+	float precio_pr;
+	float precio_pu;
 	int stock; // STOCK del producto
 
 public:
@@ -80,13 +80,9 @@ public:
 
 // crirerios para comparar dos Productos
 
-/// @brief Funcion para comparar dos Productos por nombre y apellido
-//bool criterio_comparacion_apellido_y_nombre(const Producto &p1, const Producto &p2);
-/// @brief Funcion para comparar Productos por direccion
-//bool criterio_comparacion_direccion(const Producto &p1, const Producto &p2);
-/// @brief Funcion para comparar dos Productos por telefono
-//bool criterio_comparacion_telefono(const Producto &p1, const Producto &p2);
-/// @brief Funcion para comparar dos Productos por email
-//bool criterio_comparacion_email(const Producto &p1, const Producto &p2);
+/// @brief Funcion para comparar dos Productos por Marca
+bool criterio_comparacion_marca(const Producto &p1, const Producto &p2);
+bool criterio_comparacion_codigo(const Producto &p1, const Producto &p2);
+
 
 #endif

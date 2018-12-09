@@ -156,54 +156,24 @@ std::string Producto::ValidarDatos() {
 }
 
 /**
-* Devulve true si la combinacion "apellido, nombre" del primer Producto esta
-* antes segun el orden alfabetico que el apellido y nombre del segunda Producto.
+* Devulve true si el string marca del primer Producto esta
+* antes segun el orden alfabetico que el string marca del segundo Producto.
 * Se usa como argumento para la funcion sort para ordenar toda la lista.
 **/
-//bool criterio_comparacion_apellido_y_nombre(const Producto &p1, const Producto &p2) {
-//	std::string s2 = p2.VerApellido()+", "+p2.VerNombre();
-//	std::string s1 = p1.VerApellido()+", "+p1.VerNombre();
-//	pasar_a_minusculas(s1);
-//	pasar_a_minusculas(s2);
-//	return s1<s2;
-//}
+bool criterio_comparacion_marca(const Producto &p1, const Producto &p2) {
+	std::string s2 = p2.VerMarca();
+	std::string s1 = p1.VerMarca();
+	pasar_a_minusculas(s1);
+	pasar_a_minusculas(s2);
+	return s1<s2;
+}
 
 /**
-* Devulve true si la direccion del primer Producto esta antes segun el orden
-* alfabetico que la direccion del segunda Producto.
+* Devulve true si el codigo del primer Producto es menor que el codigo del segundo Producto.
 * Se usa como argumento para la funcion sort para ordenar toda la lista.
 **/
-//bool criterio_comparacion_direccion(const Producto &p1, const Producto &p2) {
-//	std::string s1 = p1.VerDireccion();
-//	std::string s2 = p2.VerDireccion();
-//	pasar_a_minusculas(s1);
-//	pasar_a_minusculas(s2);
-//	return s1<s2;
-//}
-
-/**
-* Devulve true si el nro de telefono del primer Producto esta antes segun el
-* orden alfabetico que el numero de telefono del segunda Producto.
-* Se usa como argumento para la funcion sort para ordenar toda la lista.
-**/
-//bool criterio_comparacion_telefono(const Producto &p1, const Producto &p2) {
-//	std::string s1 = p1.VerTelefono();
-	//std::string s2 = p2.VerTelefono();
-	//pasar_a_minusculas(s1);
-	//pasar_a_minusculas(s2);
-	//return s1<s2;
-//}
-
-/**
-* Devulve true si la direccion de correo electronico del primer Producto esta
-* antes segun el orden alfabetico que la direccion de correo electronico del
-* segunda Producto.
-* Se usa como argumento para la funcion sort para ordenar toda la lista.
-**/
-//bool criterio_comparacion_email(const Producto &p1, const Producto &p2) {
-	//std::string s1 = p1.VerEmail();
-	//std::string s2 = p2.VerEmail();
-	//pasar_a_minusculas(s1);
-	//pasar_a_minusculas(s2);
-	//return s1<s2;
-//}
+bool criterio_comparacion_codigo (const Producto &p1, const Producto &p2) {
+	long long c1 = p1.VerCodigo();
+  long long c2 = p2.VerCodigo();
+	return c1<c2;
+}
