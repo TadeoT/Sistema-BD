@@ -104,10 +104,10 @@ std::string BD::AgregarCliente(const Cliente &p) {
 	int dni = p.VerDni();
 	auto it =find_if(arregloCliente.begin(),arregloCliente.end(),[&dni](const Cliente& c){ return c.VerDni() == dni;});
 
-	if(it == arregloCliente.end()){
+	if(it == arregloCliente.end() && dni>1){
 		arregloCliente.push_back(p);
 		return "Cliente Ingresado";
-	}else return "Ya existe el DNI ingresado";
+	}else return "Ya existe el DNI ingresado, Verifique DNI";
 }
 
 
