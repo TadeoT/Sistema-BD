@@ -6,6 +6,8 @@
 #include <algorithm>
 #include "BD.h"
 #include "Utils.h"
+#include <iostream>
+using namespace std;
 
 BD::BD(std::string a_nombre_archivo_cliente,std::string a_nombre_archivo_producto,std::string a_nombre_archivo_pedido) {
 	nombre_archivo_cliente = a_nombre_archivo_cliente;
@@ -98,14 +100,87 @@ int BD::CantidadDatos_pedido(){
 	return arregloPedido.size();
 }
 
-void BD::AgregarCliente(const Cliente &p) {
-	arregloCliente.push_back(p);
+std::string BD::AgregarCliente(const Cliente &p) {
+	int dni = p.VerDni();
+	auto it =find_if(arregloCliente.begin(),arregloCliente.end(),[&dni](const Cliente& c){ return c.VerDni() == dni;});
+
+	if(it == arregloCliente.end()){
+		arregloCliente.push_back(p);
+		return "Cliente Ingresado";
+	}else return "Ya existe el DNI ingresado";
 }
-void BD::AgregarProducto(const Producto &p){
+
+
+std::string BD::AgregarProducto(const Producto &p){
+	long long codigo = p.VerCodigo();
+	auto ut =find_if(arregloProducto.begin(),arregloProducto.end(),[&codigo](const Producto& p){ return p.VerCodigo() == codigo;});
+
+	if(ut == arregloProducto.end()){
 	arregloProducto.push_back(p);
+	return "Producto Ingresado";
+}else return "Ya existe el CODIGO ingresado";
 }
-void BD::AgregarPedido(const Pedido &p){
+
+
+std::string BD::AgregarPedido( Pedido &p){
+	//------------------VARIABLES BUSQUEDA-------------------------------
+	//declaro las variables que voy a usar
+	int dni = p.VerdniCliente(),cantidad = p.VerCantidad();
+	long long codigo = p.VercodigoProducto();
+
+	//------------------BUSQUEDA---------------------------------
+	//hago la busquedad del dni del cliente
+	auto it =find_if(arregloCliente.begin(),arregloCliente.end(),[&dni](const Cliente& c){ return c.VerDni() == dni;});
+	//hago la busqueda del codigo del Producto
+	auto ut =find_if(arregloProducto.begin(),arregloProducto.end(),[&codigo](const Producto& p){ return p.VerCodigo() == codigo;});
+
+	//--------------------SI EXISTE----------------------------------------------
+	if(it !=arregloCliente.end() && ut !=arregloProducto.end()){
+
+	//---------------------indices-----------------------------------
+	auto indexC = std::distance(arregloCliente.begin(), it);
+	auto indexP = std::distance(arregloProducto.begin(),ut);
+	//------------------calculos-----------------------------------
+	bool controlador=false;
+	if (p.VercategoriaVenta()==1){
+	int total = arregloProducto[indexP].VerPrecio_di() * p.VerCantidad();
+	p.Modificartotal(total);
+	controlador=true;
+	}
+	if (p.VercategoriaVenta()==2){
+	int total = arregloProducto[indexP].VerPrecio_pr() * p.VerCantidad();
+	p.Modificartotal(total);
+	controlador=true;
+	}
+	if (p.VercategoriaVenta()==3){
+	int total = arregloProducto[indexP].VerPrecio_pu() * p.VerCantidad();
+	p.Modificartotal(total);
+	controlador=true;
+	}
+	if (controlador){
+	float deuda= p.Verpagado() - p.Vertotal();
+	p.Modificardeuda(deuda);
+	}
+
+	//-------------------modificar---------------------------------
+
+	//modifico el SALDO del cliente
+	float deudaActual = arregloCliente[indexC].VerSaldo() + p.Verdeuda();
+	arregloCliente[indexC].ModificarSaldo(deudaActual);
+
+	//modifico el STOCK del Producto
+	int stockActual = arregloProducto[indexP].VerStock() - cantidad;
+	arregloProducto[indexP].ModificarStock(stockActual);
+	//------------------------------------------------------------
+	//Agrego al Vector el pedido
 	arregloPedido.push_back(p);
+ 	return "Pedido Ingresado\n";
+
+	}
+	//------------------------NO EXISTE-------------------------------------------
+	else {return "No se encontro el DNI del cliente o el Codigo del producto \n";}
+
+
 }
 
 // compara nombre y apellido, sin diferenciar may�sculas y min�sculas
@@ -122,7 +197,7 @@ int BD::BuscarApellidoYNombre(std::string parte, int pos_desde) {
 	return NO_SE_ENCUENTRA;
 }
 
-void BD::Ordenar(CriterioOrden criterio) {
+void BD::OrdenarCliente(CriterioOrdenCliente criterio) {
 	switch (criterio) {
 	case ORDEN_APELLIDO_Y_NOMBRE:
 		sort(arregloCliente.begin(),arregloCliente.end(),criterio_comparacion_apellido_y_nombre);
@@ -138,6 +213,18 @@ void BD::Ordenar(CriterioOrden criterio) {
 		break;
 	};
 }
+
+void BD::OrdenarProducto(CriterioOrdenProducto criterio){
+	switch (criterio){
+		case ORDEN_MARCA:
+			sort (arregloProducto.begin(),arregloProducto.end(),criterio_comparacion_marca);
+			break;
+		case ORDEN_CODIGO:
+			sort (arregloProducto.begin(),arregloProducto.end(),criterio_comparacion_codigo);
+			break;
+	};
+}
+
 
 void BD::EliminarCliente(int i) {
 	arregloCliente.erase(arregloCliente.begin()+i);

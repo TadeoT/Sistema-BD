@@ -128,7 +128,7 @@ std::string Cliente::ValidarDatos() {
 	if (direccion.size()>256) errores+="La direccion es demasiado largo\n";
 	if (localidad.size()>256) errores+="La localidad es demasiado largo\n";
 	if (email.size()>256) errores+="El e-mail es demasiado largo\n";
-	if (dni<0 || dni>99999999) errores+="El dni no puede ser negativo, No puede ser mayor a 8 digitos\n";
+	if (dni<1 || dni>99999999) errores+="El dni no puede ser negativo, No puede ser mayor a 8 digitos\n";
 	return errores;
 }
 

@@ -20,7 +20,8 @@
 
 /// @brief enumeraci�n para los posibles criterios de ordenamiento
 /// es para pasar como argumento al m�todo, queda m�s legible que un n�mero
-enum CriterioOrden { ORDEN_APELLIDO_Y_NOMBRE, ORDEN_TELEFONO, ORDEN_DIRECCION, ORDEN_EMAIL };
+enum CriterioOrdenCliente { ORDEN_APELLIDO_Y_NOMBRE, ORDEN_TELEFONO, ORDEN_DIRECCION, ORDEN_EMAIL };
+enum CriterioOrdenProducto {ORDEN_MARCA, ORDEN_CODIGO};
 
 /**
 * @brief Clase contenedora que administra la lista de Clientes,Productos y Ventas
@@ -61,9 +62,9 @@ public:
 	int CantidadDatos_producto();
 	int CantidadDatos_pedido();
 	/// @brief Agrega un registro
-	void AgregarCliente(const Cliente &p);
-	void AgregarProducto(const Producto &p);
-	void AgregarPedido(const Pedido &p);
+	std::string AgregarCliente(const Cliente &p);
+	std::string AgregarProducto(const Producto &p);
+	std::string AgregarPedido(Pedido &p);
 
 	/// @brief Devuelve un registro para ver o modificar
 	//Cliente &operator[](int i);
@@ -80,7 +81,9 @@ public:
 	void EliminarPedido(int i);
 
 	/// @brief Ordena el vector
-	void Ordenar(CriterioOrden criterio);
+	void OrdenarCliente(CriterioOrdenCliente criterio);
+	void OrdenarProducto(CriterioOrdenProducto criterio);
+
 
 	// funciones para busquedas
 	/// @brief Buscar un Cliente por nombre

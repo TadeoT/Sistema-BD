@@ -22,11 +22,11 @@ int main (int argc, char *argv[]) {
 		cout<<i<<" "<<"DNI CLIENTE: "<<p.VerdniCliente()<<" TOTAL: "<<p.Vertotal()<<" Deuda adquirir: "<<p.Verdeuda()<<" Cantidad: "<<p.VerCantidad()<<" Fecha: "<<p.Verdia()<<"/"<<p.Vermes()<<"/"<<p.Veranio()<<endl;
 	}
 	
-	baseDatos.OrdenarProducto(ORDEN_MARCA);
-	for(int i=0;i<baseDatos.CantidadDatos_producto();i++){
-		Producto &p = baseDatos.VerProducto(i);
-		cout<<i<<" "<<p.VerMarca()<<", "<<p.VerNombre()<<" CODIGO: "<<p.VerCodigo()<<" STOCK: "<<p.VerStock()<<" Precio Publico: "<<p.VerPrecio_pu()<<endl;
-	}
+//	baseDatos.OrdenarProducto(ORDEN_MARCA);
+//	for(int i=0;i<baseDatos.CantidadDatos_producto();i++){
+//		Producto &p = baseDatos.VerProducto(i);
+//		cout<<i<<" "<<p.VerMarca()<<", "<<p.VerNombre()<<" CODIGO: "<<p.VerCodigo()<<" STOCK: "<<p.VerStock()<<" Precio Publico: "<<p.VerPrecio_pu()<<endl;
+//	}
 	
 
 	

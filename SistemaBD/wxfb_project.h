@@ -18,10 +18,10 @@
 #include <wx/settings.h>
 #include <wx/sizer.h>
 #include <wx/button.h>
-#include <wx/hyperlink.h>
-#include <wx/frame.h>
 #include <wx/textctrl.h>
 #include <wx/grid.h>
+#include <wx/frame.h>
+#include <wx/dialog.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -35,46 +35,80 @@ class Base_principal : public wxFrame
 	
 	protected:
 		wxStaticText* m_staticText2;
-		wxButton* m_button4;
-		wxButton* m_button5;
-		wxButton* m_button6;
-		wxStaticText* dataVersion;
-		wxStaticText* m_staticText6;
-		wxHyperlinkCtrl* m_hyperlink1;
+		wxStaticText* m_staticText21;
+		wxButton* m_button10;
+		wxTextCtrl* m_textCtrl1;
+		wxGrid* m_grillaClientes;
+		wxButton* AgregarCliente;
+		wxButton* ModificarCliente;
+		wxButton* EliminarCliente;
+		wxStaticText* m_staticText3;
+		wxButton* m_button11;
+		wxTextCtrl* m_textCtrl2;
+		wxGrid* m_grillaProductos;
+		wxButton* AgregarProducto;
+		wxButton* ModificarProducto;
+		wxButton* EliminarProducto;
+		wxStaticText* m_staticText5;
+		wxGrid* m_grillaPedidos;
+		wxButton* AgregarPedido;
+		wxButton* ModificarPedido;
+		wxButton* EliminarPedido;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OnClickVerProductos( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickAgregarCliente( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickModificarCliente( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickEliminarCliente( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickAgregarProducto( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickModificarProducto( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickEliminarProducto( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickAgregarPedido( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickModificarPedido( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickEliminarPedido( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
-		Base_principal( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 908,507 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		Base_principal( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1547,735 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~Base_principal();
 	
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Class Base_Productos
+/// Class Base_AgregarCliente
 ///////////////////////////////////////////////////////////////////////////////
-class Base_Productos : public wxFrame 
+class Base_AgregarCliente : public wxDialog 
 {
 	private:
 	
 	protected:
-		wxButton* m_button4;
-		wxTextCtrl* m_textCtrl1;
-		wxButton* m_button5;
-		wxGrid* m_grid2;
-		wxButton* m_button6;
-		wxButton* m_button7;
-		wxButton* m_button8;
+		wxStaticText* m_staticText7;
+		wxTextCtrl* m_apellidoC;
+		wxStaticText* m_staticText71;
+		wxTextCtrl* m_nombreC;
+		wxStaticText* m_staticText72;
+		wxTextCtrl* m_telC;
+		wxStaticText* m_staticText73;
+		wxTextCtrl* m_direccionC;
+		wxStaticText* m_staticText74;
+		wxTextCtrl* m_localidadC;
+		wxStaticText* m_staticText75;
+		wxTextCtrl* m_emailC;
+		wxStaticText* m_staticText76;
+		wxTextCtrl* m_dniC;
+		wxButton* AceptarCliente;
+		wxButton* CancelarCliente;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void ClickAceptarCliente( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickCancerlarCliente( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		
-		Base_Productos( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 809,461 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
-		
-		~Base_Productos();
+		Base_AgregarCliente( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 618,454 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~Base_AgregarCliente();
 	
 };
 
