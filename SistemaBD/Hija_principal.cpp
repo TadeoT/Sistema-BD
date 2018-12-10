@@ -75,7 +75,7 @@ void Hija_principal::refrescarGrillaCliente(){
 		m_grillaClientes->SetCellValue(i,0,s_dni);
 		
 		stringstream ss_saldo("");
-		ss_saldo <<c.VerSaldo()<<endl;
+		ss_saldo<<"$ " <<c.VerSaldo()<<endl;
 		string s_saldo = ss_saldo.str();
 		m_grillaClientes->SetCellValue(i,5,s_saldo);
 		
@@ -121,24 +121,6 @@ void Hija_principal::refrescarGrillaProducto(){
 		//		m_grillaClientes->SetCellValue(i,2,c.VerSaldo());
 	}
 }
-//void Hija_principal::refrescarGrillaPedido(){
-//	if(m_grillaPedidos->GetNumberRows()!=0){
-//		m_grillaPedidos->DeleteRows(0,m_grillaPedidos->GetNumberRows());
-//	}
-//	for (int i = 0;i<m_BaseDatos->CantidadDatos_pedido();i++){
-//		Pedido &p = m_BaseDatos->VerPedido(i);
-//		m_grillaPedidos->AppendRows();
-//		
-//		stringstream ss_total("");
-//		ss_total <<p.Vertotal()<<endl;
-//		string s_total = ss_total.str();
-//		m_grillaPedidos->SetCellValue(i,6,s_total);
-//		
-//		/*m_grillaProductos->SetCellValue(i,1,);*/
-//	}
-//}
-
-
 
 
 void Hija_principal::ClickMenuAgregarPedido( wxCommandEvent& event )  {

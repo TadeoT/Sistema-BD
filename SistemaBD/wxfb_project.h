@@ -160,23 +160,21 @@ class Base_AgregarPedido : public wxDialog
 	
 	protected:
 		wxStaticText* m_staticText27;
-		wxTextCtrl* m_textCtrl26;
+		wxTextCtrl* DNIClientePedido;
 		wxStaticText* m_staticText271;
-		wxTextCtrl* m_textCtrl261;
+		wxTextCtrl* CodigoProductoPedido;
 		wxStaticText* m_staticText272;
-		wxTextCtrl* m_textCtrl262;
+		wxTextCtrl* PagadoPedido;
 		wxStaticText* m_staticText273;
-		wxTextCtrl* m_textCtrl263;
+		wxTextCtrl* CategoriaPedido;
 		wxStaticText* m_staticText274;
-		wxTextCtrl* m_textCtrl264;
-		wxStaticText* m_staticText275;
-		wxTextCtrl* m_textCtrl265;
-		wxButton* m_button17;
-		wxButton* m_button16;
+		wxTextCtrl* CantidadPedido;
+		wxButton* AceptarPedido;
+		wxButton* CancelarPedido;
 	
 	public:
 		
-		Base_AgregarPedido( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Agregar Pedido"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 848,612 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		Base_AgregarPedido( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Agregar Pedido"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 592,612 ), long style = wxDEFAULT_DIALOG_STYLE ); 
 		~Base_AgregarPedido();
 	
 };
@@ -189,8 +187,12 @@ class Base_VerPedidos : public wxDialog
 	private:
 	
 	protected:
-		wxGrid* m_grid3;
-		wxButton* m_button15;
+		wxGrid* m_grillaPedidos;
+		wxButton* CerrarPedido;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void CerrarVerPedido( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		

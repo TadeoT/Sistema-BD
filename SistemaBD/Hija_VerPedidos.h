@@ -8,6 +8,7 @@ class Hija_VerPedidos : public Base_VerPedidos {
 private:
 	BD *m_BaseDatos;
 protected:
+	void CerrarVerPedido( wxCommandEvent& event )  override;
 	
 public:
 	Hija_VerPedidos(wxWindow *parent,BD *BaseDatos);
