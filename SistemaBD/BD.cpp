@@ -112,7 +112,7 @@ std::string BD::AgregarCliente(const Cliente &p) {
 
 
 std::string BD::AgregarProducto(const Producto &p){
-	long long codigo = p.VerCodigo();
+	int codigo = p.VerCodigo();
 	auto ut =find_if(arregloProducto.begin(),arregloProducto.end(),[&codigo](const Producto& p){ return p.VerCodigo() == codigo;});
 
 	if(ut == arregloProducto.end()){
@@ -126,7 +126,7 @@ std::string BD::AgregarPedido( Pedido &p){
 	//------------------VARIABLES BUSQUEDA-------------------------------
 	//declaro las variables que voy a usar
 	int dni = p.VerdniCliente(),cantidad = p.VerCantidad();
-	long long codigo = p.VercodigoProducto();
+	int codigo = p.VercodigoProducto();
 
 	//------------------BUSQUEDA---------------------------------
 	//hago la busquedad del dni del cliente

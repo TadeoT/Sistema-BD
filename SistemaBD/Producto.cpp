@@ -8,7 +8,7 @@
 
 Producto::Producto(std::string a_marca, std::string a_nombre, std::string a_descripcion,
     std::string a_clasificacion, std::string a_composicion, std::string a_presentacion,
-    long long a_codigo, float a_precio_di, float a_precio_pr, float a_precio_pu, int a_stock)
+    int a_codigo, float a_precio_di, float a_precio_pr, float a_precio_pu, int a_stock)
 {
 
 	marca=a_marca;
@@ -98,7 +98,7 @@ void Producto::ModificarPrecio(float a_precio_di, float a_precio_pr, float a_pre
 	precio_pu=a_precio_pu;
 }
 
-void Producto::ModificarCodigo(long long a_codigo){
+void Producto::ModificarCodigo(int a_codigo){
   codigo=a_codigo;
 }
 
@@ -173,7 +173,7 @@ bool criterio_comparacion_marca(const Producto &p1, const Producto &p2) {
 * Se usa como argumento para la funcion sort para ordenar toda la lista.
 **/
 bool criterio_comparacion_codigo (const Producto &p1, const Producto &p2) {
-	long long c1 = p1.VerCodigo();
-  long long c2 = p2.VerCodigo();
+	int c1 = p1.VerCodigo();
+  int c2 = p2.VerCodigo();
 	return c1<c2;
 }

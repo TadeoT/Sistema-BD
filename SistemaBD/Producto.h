@@ -12,7 +12,7 @@ struct registro_Producto {
 	char clasificacion[256];
 	char composicion[256];
 	char presentacion[256];
-	long long codigo;
+	int codigo;
 	float precio_di, precio_pr, precio_pu;
 	int stock;
 };
@@ -29,7 +29,7 @@ private:
 	std::string clasificacion;
 	std::string composicion;
 	std::string presentacion;
-  long long codigo;
+  int codigo;
 	float precio_di;
 	float precio_pr;
 	float precio_pu;
@@ -41,7 +41,7 @@ public:
 	/// Inicializa los datos de el Producto
 	Producto(std::string a_marca="", std::string a_nombre="", std::string a_descripcion="",
 			std::string a_clasificacion="", std::string a_composicion="", std::string a_presentacion="",
-      long long a_codigo=0, float a_precio_di=0, float a_precio_pr=0, float a_precio_pu=0, int a_stock=0);
+      int a_codigo=0, float a_precio_di=0, float a_precio_pr=0, float a_precio_pu=0, int a_stock=0);
 
 	/// Valida que los datos cargados sean correctos y suficientes
 	std::string ValidarDatos();
@@ -67,7 +67,7 @@ public:
 	void ModificarComposicion(std::string a_composicion); ///<
 	void ModificarPresentacion(std::string a_presentacion); ///<
 	void ModificarPrecio(float a_precio_di, float a_precio_pr, float a_precio_pu); ///<
-	void ModificarCodigo(long long a_codigo);
+	void ModificarCodigo(int a_codigo);
 	void ModificarStock(int a_stock);
 
 

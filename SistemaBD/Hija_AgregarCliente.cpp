@@ -15,9 +15,8 @@ void Hija_AgregarCliente::ClickAceptarCliente( wxCommandEvent& event )  {
 	string dir = wx_to_std (m_direccionC->GetValue());
 	string local = wx_to_std (m_localidadC->GetValue());
 	string email = wx_to_std (m_emailC->GetValue());
-	long dni;
 	float saldo=0;
-	m_dniC->GetValue().ToLong(&dni);
+	int dni = atoi(m_dniC->GetValue());
 	
 	Cliente p(nom,ape,tel,dir,local,email,dni,saldo);
 	

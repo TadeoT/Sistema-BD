@@ -69,7 +69,7 @@ class Base_principal : public wxFrame
 	
 	public:
 		
-		Base_principal( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Sistema DB"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1381,735 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		Base_principal( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Sistema DB"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1384,735 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~Base_principal();
 	
@@ -171,6 +171,11 @@ class Base_AgregarPedido : public wxDialog
 		wxTextCtrl* CantidadPedido;
 		wxButton* AceptarPedido;
 		wxButton* CancelarPedido;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void ClickAceptarPedido( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickCancelarPedido( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		
@@ -196,8 +201,53 @@ class Base_VerPedidos : public wxDialog
 	
 	public:
 		
-		Base_VerPedidos( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Pedidos Realizados"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1014,552 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		Base_VerPedidos( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Pedidos Realizados"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 759,552 ), long style = wxDEFAULT_DIALOG_STYLE ); 
 		~Base_VerPedidos();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class Base_AgregarProducto
+///////////////////////////////////////////////////////////////////////////////
+class Base_AgregarProducto : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText45;
+		wxTextCtrl* CodigoP;
+		wxStaticText* m_staticText451;
+		wxTextCtrl* MarcaP;
+		wxStaticText* m_staticText452;
+		wxTextCtrl* NombreP;
+		wxStaticText* m_staticText453;
+		wxTextCtrl* DescripcionP;
+		wxStaticText* m_staticText454;
+		wxTextCtrl* ClasificacionP;
+		wxStaticText* m_staticText455;
+		wxTextCtrl* ComposicionP;
+		wxStaticText* m_staticText456;
+		wxTextCtrl* PresentacionP;
+		wxStaticText* m_staticText457;
+		wxTextCtrl* StockP;
+		wxStaticText* m_staticText458;
+		wxTextCtrl* Precio_diP;
+		wxStaticText* m_staticText459;
+		wxTextCtrl* Precio_prD;
+		wxStaticText* m_staticText4510;
+		wxTextCtrl* Precio_puD;
+		wxButton* AceptarProducto;
+		wxButton* CancelarProducto;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void ClickAceptarProducto( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickCancelarProducto( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		Base_AgregarProducto( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Agregar Producto"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 626,554 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~Base_AgregarProducto();
 	
 };
 

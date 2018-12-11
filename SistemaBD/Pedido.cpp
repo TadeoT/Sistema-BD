@@ -5,7 +5,7 @@
 #include <ctime>
 
 
-Pedido::Pedido(int a_dniCliente, long long a_codigoProducto,float a_pagado,int a_cantidad, int a_categoriaVenta)
+Pedido::Pedido(int a_dniCliente, int a_codigoProducto,float a_pagado,int a_cantidad, int a_categoriaVenta)
 {
 
   time_t t1 = time(NULL);
@@ -27,7 +27,7 @@ Pedido::Pedido(int a_dniCliente, long long a_codigoProducto,float a_pagado,int a
 int Pedido::VerdniCliente() const {
   return dniCliente;
 }
-long long Pedido::VercodigoProducto() const {
+int Pedido::VercodigoProducto() const {
   return codigoProducto;
 }
 float Pedido::Vertotal() const {
@@ -58,7 +58,7 @@ int Pedido::VercategoriaVenta() const{
 void Pedido::ModificardniCliente(int a_dniCliente){
   dniCliente=a_dniCliente;
 }
-void Pedido::ModificarcodigoProducto(long long a_codigoProducto){
+void Pedido::ModificarcodigoProducto(int a_codigoProducto){
   codigoProducto=a_codigoProducto;
 }
 void Pedido::Modificartotal(float a_total){

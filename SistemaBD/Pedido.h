@@ -6,7 +6,7 @@
 
 struct registro_Pedido {
 	int dniCliente;
-  long long codigoProducto;
+  int codigoProducto;
   float total,pagado,deuda;
   int dia,mes,anio,cantidad,categoriaVenta;
 
@@ -18,20 +18,20 @@ class Pedido {
 private:
 
 	int dniCliente;
-  long long codigoProducto;
+  int codigoProducto;
   float total,pagado,deuda;
   int dia,mes,anio,cantidad,categoriaVenta;
 
 public:
 
-	Pedido(int a_dniCliente=0, long long a_codigoProducto=0, float a_pagado=0,int a_cantidad=0,int a_categoriaVenta=0);
+	Pedido(int a_dniCliente=0, int a_codigoProducto=0, float a_pagado=0,int a_cantidad=0,int a_categoriaVenta=0);
 
 	/// Valida que los datos cargados sean correctos y suficientes
 	std::string ValidarDatos();
 
 	// obtener los datos guardados
 	int VerdniCliente() const;
-	long long VercodigoProducto() const;
+	int VercodigoProducto() const;
 	float Vertotal() const;
 	float Verpagado() const;
 	float Verdeuda() const;
@@ -43,7 +43,7 @@ public:
 
 	// modificar los datos
 	void ModificardniCliente(int a_dniCliente);
-	void ModificarcodigoProducto(long long a_codigoProducto);
+	void ModificarcodigoProducto(int a_codigoProducto);
 	void Modificartotal(float a_total);
 	void Modificarpagado(float a_pagado);
 	void Modificardeuda(float a_deuda);

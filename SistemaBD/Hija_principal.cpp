@@ -7,6 +7,7 @@
 #include "Hija_ModificarCliente.h"
 #include "Hija_AgregarPedido.h"
 #include "Hija_VerPedidos.h"
+#include "Hija_AgregarProducto.h"
 using namespace std;
 
 Hija_principal::Hija_principal(BD *BaseDatos) : Base_principal(NULL), m_BaseDatos(BaseDatos)
@@ -37,16 +38,19 @@ void Hija_principal::ClickModificarCliente( wxCommandEvent& event )  {
 
 void Hija_principal::ClickEliminarCliente( wxCommandEvent& event )  {
 	int f = m_grillaClientes->GetGridCursorRow();
-	m_BaseDatos->EliminarCliente(f);
 	int x = wxMessageBox("Esta Seguro?","Advertencia",wxYES_NO|wxICON_QUESTION);
 	if (x==wxYES){
+	m_BaseDatos->EliminarCliente(f);
 	m_BaseDatos->Guardar_cliente();
 	refrescarGrillaCliente();
 	}
 }
 
 void Hija_principal::ClickAgregarProducto( wxCommandEvent& event )  {
-	event.Skip();
+	Hija_AgregarProducto *win = new Hija_AgregarProducto (this,m_BaseDatos);
+	if(win->ShowModal()==1){
+		refrescarGrillaProducto();
+	}
 }
 
 void Hija_principal::ClickModificarProducto( wxCommandEvent& event )  {
@@ -54,7 +58,13 @@ void Hija_principal::ClickModificarProducto( wxCommandEvent& event )  {
 }
 
 void Hija_principal::ClickEliminarProducto( wxCommandEvent& event )  {
-	event.Skip();
+	int f = m_grillaProductos->GetGridCursorRow();
+	int x = wxMessageBox("Esta Seguro?","Advertencia",wxYES_NO|wxICON_QUESTION);
+	if (x==wxYES){
+		m_BaseDatos->EliminarProducto(f);
+		m_BaseDatos->Guardar_producto();
+		refrescarGrillaCliente();
+	}
 }
 
 void Hija_principal::refrescarGrillaCliente(){
@@ -90,8 +100,8 @@ void Hija_principal::refrescarGrillaProducto(){
 		m_grillaProductos->AppendRows();
 		m_grillaProductos->SetCellValue(i,1,p.VerMarca());
 		m_grillaProductos->SetCellValue(i,2,p.VerNombre());
-		m_grillaProductos->SetCellValue(i,3,p.VerPresentacion());
-		m_grillaProductos->SetCellValue(i,4,p.VerClasificacion());
+		m_grillaProductos->SetCellValue(i,4,p.VerPresentacion());
+		m_grillaProductos->SetCellValue(i,3,p.VerClasificacion());
 		
 		stringstream ss_codigo("");
 		ss_codigo<<p.VerCodigo()<<endl;

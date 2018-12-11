@@ -8,6 +8,8 @@ class Hija_AgregarPedido : public Base_AgregarPedido {
 private:
 	BD *m_BaseDatos;
 protected:
+	void ClickAceptarPedido( wxCommandEvent& event )  override;
+	void ClickCancelarPedido( wxCommandEvent& event )  override;
 	
 public:
 	Hija_AgregarPedido(wxWindow *parent,BD *BaseDatos);
