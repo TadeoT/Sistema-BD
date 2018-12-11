@@ -69,7 +69,7 @@ class Base_principal : public wxFrame
 	
 	public:
 		
-		Base_principal( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Sistema DB"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1384,735 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		Base_principal( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Sistema BD"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1384,735 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~Base_principal();
 	
