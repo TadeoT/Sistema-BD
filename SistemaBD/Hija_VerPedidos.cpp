@@ -21,38 +21,33 @@ Hija_VerPedidos::Hija_VerPedidos(wxWindow *parent, BD *BaseDatos) : Base_VerPedi
 		string s_dni = ss_dni.str();
 		m_grillaPedidos->SetCellValue(e,1,s_dni);
 		
+		stringstream ss_factura("");
+		ss_factura<<p.VernumeroFactura();
+		string s_factura = ss_factura.str();
+		m_grillaPedidos->SetCellValue(e,2,s_factura);
+		
 		stringstream ss_codigo("");
 		ss_codigo<<p.VercodigoProducto();
 		string s_codigo = ss_codigo.str();
-		m_grillaPedidos->SetCellValue(e,2,s_codigo);
+		m_grillaPedidos->SetCellValue(e,3,s_codigo);
 		
 		int cat = p.VercategoriaVenta();
 		string categoria;
 		if(cat==1){categoria="Precio Distribuidora";}
 		if(cat==2){categoria="Precio Profesional";}
 		if(cat==3){categoria="Precio Publico";}
-		m_grillaPedidos->SetCellValue(e,3,categoria);
+		m_grillaPedidos->SetCellValue(e,4,categoria);
 		
 		stringstream ss_cantidad("");
 		ss_cantidad<<p.VerCantidad();
 		string s_cantidad = ss_cantidad.str();
-		m_grillaPedidos->SetCellValue(e,4,s_cantidad);
-		
-		stringstream ss_pagado("");
-		ss_pagado<<p.Verpagado();
-		string s_pagado = ss_pagado.str();
-		m_grillaPedidos->SetCellValue(e,5,s_pagado);
-		
-		stringstream ss_deuda("");
-		ss_deuda<<p.Verdeuda();
-		string s_deuda = ss_deuda.str();
-		m_grillaPedidos->SetCellValue(e,6,s_deuda);
+		m_grillaPedidos->SetCellValue(e,5,s_cantidad);
 		
 		
 		stringstream ss_total("");
 		ss_total<<"$ " <<p.Vertotal();
 		string s_total = ss_total.str();
-		m_grillaPedidos->SetCellValue(e,7,s_total);
+		m_grillaPedidos->SetCellValue(e,6,s_total);
 	}
 	
 }

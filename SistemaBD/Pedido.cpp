@@ -5,7 +5,7 @@
 #include <ctime>
 
 
-Pedido::Pedido(int a_dniCliente, int a_codigoProducto,float a_pagado,int a_cantidad, int a_categoriaVenta)
+Pedido::Pedido(int a_dniCliente, int a_codigoProducto,float a_pagado,int a_cantidad, int a_categoriaVenta, int a_numeroFactura)
 {
 
   time_t t1 = time(NULL);
@@ -22,6 +22,7 @@ Pedido::Pedido(int a_dniCliente, int a_codigoProducto,float a_pagado,int a_canti
   deuda=0;
   cantidad=a_cantidad;
   categoriaVenta=a_categoriaVenta;
+  numeroFactura=a_numeroFactura;
 }
 
 int Pedido::VerdniCliente() const {
@@ -54,6 +55,9 @@ int Pedido::VerCantidad() const {
 int Pedido::VercategoriaVenta() const{
   return categoriaVenta;
 }
+int Pedido::VernumeroFactura() const{
+  return numeroFactura;
+}
 
 void Pedido::ModificardniCliente(int a_dniCliente){
   dniCliente=a_dniCliente;
@@ -81,7 +85,9 @@ void Pedido::ModificarCantidad(int a_cantidad){
 void Pedido::ModificarcategoriaVenta(int a_categoriaVenta){
   categoriaVenta=a_categoriaVenta;
 }
-
+void Pedido::ModificarnumeroFactura(int a_numeroFactura){
+  numeroFactura=a_numeroFactura;
+}
 
 void Pedido::GuardarEnBinario(std::ofstream &archivo) {
 	registro_Pedido reg;
@@ -95,6 +101,7 @@ void Pedido::GuardarEnBinario(std::ofstream &archivo) {
   reg.anio=anio;
   reg.cantidad=cantidad;
   reg.categoriaVenta=categoriaVenta;
+  reg.numeroFactura=numeroFactura;
 	archivo.write((char*)&reg,sizeof(reg));
 }
 
@@ -111,6 +118,7 @@ void Pedido::LeerDesdeBinario(std::ifstream &archivo) {
   anio=reg.anio;
   cantidad=reg.cantidad;
   categoriaVenta=reg.categoriaVenta;
+  numeroFactura=reg.numeroFactura;
 }
 
 
@@ -119,6 +127,7 @@ std::string Pedido::ValidarDatos() {
   if (pagado<0 || pagado>99999999) errores+="Pagado debe estar entre 0 y 999999999 \n";
   if (dniCliente<0 || dniCliente>99999999) errores+="Dni debe estar entre 0 y 99999999 \n";
   if (codigoProducto	<999 || codigoProducto>9999) errores+="Codigo debe tener  cuatro digitos\n";
-  if (categoriaVenta<1 && categoriaVenta>3) errores+="La categoria disponibles son: 1,2,3\n";
+  if (categoriaVenta<1 || categoriaVenta>3) errores+="La categoria disponibles son: 1,2,3\n";
+  if (numeroFactura<0) errores +="El numero de la factura no puede ser negativo\n";
 	return errores;
 }

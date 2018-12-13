@@ -57,6 +57,7 @@ class Base_principal : public wxFrame
 		wxButton* EliminarProducto;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void OnCambiaTamanio( wxSizeEvent& event ) { event.Skip(); }
 		virtual void ClickMenuAgregarPedido( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickMenuVerPedido( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickAgregarCliente( wxCommandEvent& event ) { event.Skip(); }
@@ -159,27 +160,49 @@ class Base_AgregarPedido : public wxDialog
 	private:
 	
 	protected:
-		wxStaticText* m_staticText27;
-		wxTextCtrl* DNIClientePedido;
 		wxStaticText* m_staticText271;
-		wxTextCtrl* CodigoProductoPedido;
-		wxStaticText* m_staticText272;
-		wxTextCtrl* PagadoPedido;
-		wxStaticText* m_staticText273;
-		wxTextCtrl* CategoriaPedido;
+		wxTextCtrl* CodigoPedido1;
 		wxStaticText* m_staticText274;
-		wxTextCtrl* CantidadPedido;
-		wxButton* AceptarPedido;
+		wxTextCtrl* CantidadPedido1;
+		wxStaticText* m_staticText2711;
+		wxTextCtrl* CodigoPedido2;
+		wxStaticText* m_staticText2741;
+		wxTextCtrl* CantidadPedido2;
+		wxStaticText* m_staticText2712;
+		wxTextCtrl* CodigoPedido3;
+		wxStaticText* m_staticText2742;
+		wxTextCtrl* CantidadPedido3;
+		wxStaticText* m_staticText2713;
+		wxTextCtrl* CodigoPedido4;
+		wxStaticText* m_staticText2743;
+		wxTextCtrl* CantidadPedido4;
+		wxStaticText* m_staticText2714;
+		wxTextCtrl* CodigoPedido5;
+		wxStaticText* m_staticText2744;
+		wxTextCtrl* CantidadPedido5;
+		wxStaticText* m_staticText2715;
+		wxTextCtrl* CodigoPedido6;
+		wxStaticText* m_staticText2745;
+		wxTextCtrl* CantidadPedido6;
+		wxStaticText* m_staticText2716;
+		wxTextCtrl* CodigoPedido7;
+		wxStaticText* m_staticText2746;
+		wxTextCtrl* CantidadPedido7;
+		wxStaticText* m_staticText273;
+		wxTextCtrl* DniClientePedido;
+		wxStaticText* m_staticText2731;
+		wxTextCtrl* CategoriaPedido;
 		wxButton* CancelarPedido;
+		wxButton* AceptarPedido;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void ClickAceptarPedido( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickCancelarPedido( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickAceptarPedido( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
-		Base_AgregarPedido( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Agregar Pedido"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 592,612 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		Base_AgregarPedido( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Realizar Factura"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 780,534 ), long style = wxDEFAULT_DIALOG_STYLE ); 
 		~Base_AgregarPedido();
 	
 };
@@ -201,7 +224,7 @@ class Base_VerPedidos : public wxDialog
 	
 	public:
 		
-		Base_VerPedidos( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Pedidos Realizados"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 759,552 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		Base_VerPedidos( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Facturas"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 708,552 ), long style = wxDEFAULT_DIALOG_STYLE ); 
 		~Base_VerPedidos();
 	
 };
@@ -248,6 +271,30 @@ class Base_AgregarProducto : public wxDialog
 		
 		Base_AgregarProducto( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Agregar Producto"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 626,554 ), long style = wxDEFAULT_DIALOG_STYLE ); 
 		~Base_AgregarProducto();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class Base_VerFacturas
+///////////////////////////////////////////////////////////////////////////////
+class Base_VerFacturas : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxGrid* m_grillaFacturas;
+		wxButton* m_button18;
+		wxButton* m_button19;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void ClickVerFactura( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickCerrarVerFacturas( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		Base_VerFacturas( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Facturas Realizadas"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 714,548 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~Base_VerFacturas();
 	
 };
 

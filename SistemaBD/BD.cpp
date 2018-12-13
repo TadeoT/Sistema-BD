@@ -99,6 +99,9 @@ int BD::CantidadDatos_producto(){
 int BD::CantidadDatos_pedido(){
 	return arregloPedido.size();
 }
+int BD::NumeroFacturaAnterior(){
+	return arregloPedido[arregloPedido.size()-1].VernumeroFactura();
+}
 
 std::string BD::AgregarCliente(const Cliente &p) {
 	int dni = p.VerDni();
@@ -120,6 +123,7 @@ std::string BD::AgregarProducto(const Producto &p){
 	return "Producto Ingresado";
 }else return "Ya existe el CODIGO ingresado";
 }
+
 
 
 std::string BD::AgregarPedido( Pedido &p){
@@ -174,7 +178,7 @@ std::string BD::AgregarPedido( Pedido &p){
 	//------------------------------------------------------------
 	//Agrego al Vector el pedido
 	arregloPedido.push_back(p);
- 	return "Pedido Ingresado\n";
+ 	return "";
 
 	}
 	//------------------------NO EXISTE-------------------------------------------
@@ -234,4 +238,37 @@ void BD::EliminarProducto(int i){
 }
 void BD::EliminarPedido(int i){
 	arregloPedido.erase(arregloPedido.begin()+i);
+}
+
+void BD::RecargarVectores(){
+std::ifstream archivo_cliente (nombre_archivo_cliente.c_str(),std::ios::binary|std::ios::ate);
+if (archivo_cliente.is_open()) {
+	int tamanio_archivo = archivo_cliente.tellg();
+	int cantidad_clientes = tamanio_archivo/sizeof(registro_Cliente);
+	arregloCliente.resize(cantidad_clientes);
+	archivo_cliente.seekg(0,std::ios::beg);
+	for (int i=0;i<cantidad_clientes;i++)
+		arregloCliente[i].LeerDesdeBinario(archivo_cliente);
+	archivo_cliente.close();
+}
+std::ifstream archivo_producto (nombre_archivo_producto.c_str(),std::ios::binary|std::ios::ate);
+if (archivo_producto.is_open()) {
+	int tamanio_archivo = archivo_producto.tellg();
+	int cantidad_productos = tamanio_archivo/sizeof(registro_Producto);
+	arregloProducto.resize(cantidad_productos);
+	archivo_producto.seekg(0,std::ios::beg);
+	for (int i=0;i<cantidad_productos;i++)
+		arregloProducto[i].LeerDesdeBinario(archivo_producto);
+	archivo_producto.close();
+}
+std::ifstream archivo_pedido (nombre_archivo_pedido.c_str(),std::ios::binary|std::ios::ate);
+if (archivo_pedido.is_open()) {
+	int tamanio_archivo = archivo_pedido.tellg();
+	int cantidad_pedidos = tamanio_archivo/sizeof(registro_Pedido);
+	arregloPedido.resize(cantidad_pedidos);
+	archivo_pedido.seekg(0,std::ios::beg);
+	for (int i=0;i<cantidad_pedidos;i++)
+		arregloPedido[i].LeerDesdeBinario(archivo_pedido);
+	archivo_pedido.close();
+}
 }

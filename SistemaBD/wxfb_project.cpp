@@ -16,14 +16,14 @@ Base_principal::Base_principal( wxWindow* parent, wxWindowID id, const wxString&
 	m_menubar1 = new wxMenuBar( 0 );
 	MenuPedidos = new wxMenu();
 	wxMenuItem* m_menuItem3;
-	m_menuItem3 = new wxMenuItem( MenuPedidos, wxID_ANY, wxString( wxT("Agregar Pedido") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menuItem3 = new wxMenuItem( MenuPedidos, wxID_ANY, wxString( wxT("Agregar Factura") ) , wxEmptyString, wxITEM_NORMAL );
 	MenuPedidos->Append( m_menuItem3 );
 	
 	wxMenuItem* m_menuItem4;
-	m_menuItem4 = new wxMenuItem( MenuPedidos, wxID_ANY, wxString( wxT("Lista Pedidos") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menuItem4 = new wxMenuItem( MenuPedidos, wxID_ANY, wxString( wxT("Lista Facturas") ) , wxEmptyString, wxITEM_NORMAL );
 	MenuPedidos->Append( m_menuItem4 );
 	
-	m_menubar1->Append( MenuPedidos, wxT("Menu Pedidos") ); 
+	m_menubar1->Append( MenuPedidos, wxT("Menu Facturas") ); 
 	
 	this->SetMenuBar( m_menubar1 );
 	
@@ -119,7 +119,7 @@ Base_principal::Base_principal( wxWindow* parent, wxWindowID id, const wxString&
 	
 	// Cell Defaults
 	m_grillaClientes->SetDefaultCellFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Bahnschrift") ) );
-	m_grillaClientes->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	m_grillaClientes->SetDefaultCellAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
 	bSizer11->Add( m_grillaClientes, 1, wxEXPAND|wxALL, 5 );
 	
 	wxBoxSizer* bSizer24;
@@ -215,7 +215,7 @@ Base_principal::Base_principal( wxWindow* parent, wxWindowID id, const wxString&
 	
 	// Cell Defaults
 	m_grillaProductos->SetDefaultCellFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Bahnschrift") ) );
-	m_grillaProductos->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	m_grillaProductos->SetDefaultCellAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
 	bSizer12->Add( m_grillaProductos, 1, wxEXPAND|wxALL, 5 );
 	
 	wxBoxSizer* bSizer23;
@@ -249,6 +249,7 @@ Base_principal::Base_principal( wxWindow* parent, wxWindowID id, const wxString&
 	this->Centre( wxBOTH );
 	
 	// Connect Events
+	this->Connect( wxEVT_SIZE, wxSizeEventHandler( Base_principal::OnCambiaTamanio ) );
 	this->Connect( m_menuItem3->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickMenuAgregarPedido ) );
 	this->Connect( m_menuItem4->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickMenuVerPedido ) );
 	AgregarCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickAgregarCliente ), NULL, this );
@@ -262,6 +263,7 @@ Base_principal::Base_principal( wxWindow* parent, wxWindowID id, const wxString&
 Base_principal::~Base_principal()
 {
 	// Disconnect Events
+	this->Disconnect( wxEVT_SIZE, wxSizeEventHandler( Base_principal::OnCambiaTamanio ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickMenuAgregarPedido ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickMenuVerPedido ) );
 	AgregarCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickAgregarCliente ), NULL, this );
@@ -285,10 +287,10 @@ Base_AgregarCliente::Base_AgregarCliente( wxWindow* parent, wxWindowID id, const
 	
 	m_staticText7 = new wxStaticText( this, wxID_ANY, wxT("Apellido"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText7->Wrap( -1 );
-	bSizer21->Add( m_staticText7, 0, wxALL|wxEXPAND, 5 );
+	bSizer21->Add( m_staticText7, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_apellidoC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer21->Add( m_apellidoC, 1, wxALL|wxEXPAND, 5 );
+	bSizer21->Add( m_apellidoC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer21, 1, wxEXPAND, 5 );
@@ -298,10 +300,10 @@ Base_AgregarCliente::Base_AgregarCliente( wxWindow* parent, wxWindowID id, const
 	
 	m_staticText71 = new wxStaticText( this, wxID_ANY, wxT("Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText71->Wrap( -1 );
-	bSizer211->Add( m_staticText71, 0, wxALL|wxEXPAND, 5 );
+	bSizer211->Add( m_staticText71, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_nombreC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer211->Add( m_nombreC, 1, wxALL|wxEXPAND, 5 );
+	bSizer211->Add( m_nombreC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer211, 1, wxEXPAND, 5 );
@@ -311,10 +313,10 @@ Base_AgregarCliente::Base_AgregarCliente( wxWindow* parent, wxWindowID id, const
 	
 	m_staticText72 = new wxStaticText( this, wxID_ANY, wxT("Telefono"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText72->Wrap( -1 );
-	bSizer212->Add( m_staticText72, 0, wxALL|wxEXPAND, 5 );
+	bSizer212->Add( m_staticText72, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_telC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer212->Add( m_telC, 1, wxALL|wxEXPAND, 5 );
+	bSizer212->Add( m_telC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer212, 1, wxEXPAND, 5 );
@@ -324,10 +326,10 @@ Base_AgregarCliente::Base_AgregarCliente( wxWindow* parent, wxWindowID id, const
 	
 	m_staticText73 = new wxStaticText( this, wxID_ANY, wxT("Direccion"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText73->Wrap( -1 );
-	bSizer213->Add( m_staticText73, 0, wxALL|wxEXPAND, 5 );
+	bSizer213->Add( m_staticText73, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_direccionC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer213->Add( m_direccionC, 1, wxALL|wxEXPAND, 5 );
+	bSizer213->Add( m_direccionC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer213, 1, wxEXPAND, 5 );
@@ -337,10 +339,10 @@ Base_AgregarCliente::Base_AgregarCliente( wxWindow* parent, wxWindowID id, const
 	
 	m_staticText74 = new wxStaticText( this, wxID_ANY, wxT("Localidad"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText74->Wrap( -1 );
-	bSizer214->Add( m_staticText74, 0, wxALL|wxEXPAND, 5 );
+	bSizer214->Add( m_staticText74, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_localidadC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer214->Add( m_localidadC, 1, wxALL|wxEXPAND, 5 );
+	bSizer214->Add( m_localidadC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer214, 1, wxEXPAND, 5 );
@@ -350,10 +352,10 @@ Base_AgregarCliente::Base_AgregarCliente( wxWindow* parent, wxWindowID id, const
 	
 	m_staticText75 = new wxStaticText( this, wxID_ANY, wxT("Email    "), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText75->Wrap( -1 );
-	bSizer215->Add( m_staticText75, 0, wxALL|wxEXPAND, 5 );
+	bSizer215->Add( m_staticText75, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_emailC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer215->Add( m_emailC, 1, wxALL|wxEXPAND, 5 );
+	bSizer215->Add( m_emailC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer215, 1, wxEXPAND, 5 );
@@ -363,10 +365,10 @@ Base_AgregarCliente::Base_AgregarCliente( wxWindow* parent, wxWindowID id, const
 	
 	m_staticText76 = new wxStaticText( this, wxID_ANY, wxT("DNI     "), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText76->Wrap( -1 );
-	bSizer216->Add( m_staticText76, 0, wxALL|wxEXPAND, 5 );
+	bSizer216->Add( m_staticText76, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_dniC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer216->Add( m_dniC, 1, wxALL|wxEXPAND, 5 );
+	bSizer216->Add( m_dniC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer216, 1, wxEXPAND, 5 );
@@ -564,20 +566,7 @@ Base_AgregarPedido::Base_AgregarPedido( wxWindow* parent, wxWindowID id, const w
 	bSizer50 = new wxBoxSizer( wxVERTICAL );
 	
 	wxBoxSizer* bSizer53;
-	bSizer53 = new wxBoxSizer( wxVERTICAL );
-	
-	wxBoxSizer* bSizer54;
-	bSizer54 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText27 = new wxStaticText( this, wxID_ANY, wxT("DNI Cliente        "), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText27->Wrap( -1 );
-	bSizer54->Add( m_staticText27, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
-	
-	DNIClientePedido = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer54->Add( DNIClientePedido, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
-	
-	
-	bSizer53->Add( bSizer54, 1, wxEXPAND, 5 );
+	bSizer53 = new wxBoxSizer( wxHORIZONTAL );
 	
 	wxBoxSizer* bSizer541;
 	bSizer541 = new wxBoxSizer( wxHORIZONTAL );
@@ -586,37 +575,11 @@ Base_AgregarPedido::Base_AgregarPedido( wxWindow* parent, wxWindowID id, const w
 	m_staticText271->Wrap( -1 );
 	bSizer541->Add( m_staticText271, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
-	CodigoProductoPedido = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer541->Add( CodigoProductoPedido, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	CodigoPedido1 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer541->Add( CodigoPedido1, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer53->Add( bSizer541, 1, wxEXPAND, 5 );
-	
-	wxBoxSizer* bSizer542;
-	bSizer542 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText272 = new wxStaticText( this, wxID_ANY, wxT("Pagado"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText272->Wrap( -1 );
-	bSizer542->Add( m_staticText272, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
-	
-	PagadoPedido = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer542->Add( PagadoPedido, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
-	
-	
-	bSizer53->Add( bSizer542, 1, wxEXPAND, 5 );
-	
-	wxBoxSizer* bSizer543;
-	bSizer543 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText273 = new wxStaticText( this, wxID_ANY, wxT("Categoria (Distribuidora=1,Prof.=2,Public.=3)"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText273->Wrap( -1 );
-	bSizer543->Add( m_staticText273, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
-	
-	CategoriaPedido = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer543->Add( CategoriaPedido, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
-	
-	
-	bSizer53->Add( bSizer543, 1, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer544;
 	bSizer544 = new wxBoxSizer( wxHORIZONTAL );
@@ -625,8 +588,8 @@ Base_AgregarPedido::Base_AgregarPedido( wxWindow* parent, wxWindowID id, const w
 	m_staticText274->Wrap( -1 );
 	bSizer544->Add( m_staticText274, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
-	CantidadPedido = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer544->Add( CantidadPedido, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	CantidadPedido1 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer544->Add( CantidadPedido1, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer53->Add( bSizer544, 1, wxEXPAND, 5 );
@@ -634,14 +597,238 @@ Base_AgregarPedido::Base_AgregarPedido( wxWindow* parent, wxWindowID id, const w
 	
 	bSizer50->Add( bSizer53, 1, wxEXPAND, 5 );
 	
+	wxBoxSizer* bSizer531;
+	bSizer531 = new wxBoxSizer( wxHORIZONTAL );
+	
+	wxBoxSizer* bSizer5411;
+	bSizer5411 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2711 = new wxStaticText( this, wxID_ANY, wxT("Codigo Producto"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2711->Wrap( -1 );
+	bSizer5411->Add( m_staticText2711, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CodigoPedido2 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5411->Add( CodigoPedido2, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer531->Add( bSizer5411, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer5441;
+	bSizer5441 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2741 = new wxStaticText( this, wxID_ANY, wxT("Cantidad"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2741->Wrap( -1 );
+	bSizer5441->Add( m_staticText2741, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CantidadPedido2 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5441->Add( CantidadPedido2, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer531->Add( bSizer5441, 1, wxEXPAND, 5 );
+	
+	
+	bSizer50->Add( bSizer531, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer532;
+	bSizer532 = new wxBoxSizer( wxHORIZONTAL );
+	
+	wxBoxSizer* bSizer5412;
+	bSizer5412 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2712 = new wxStaticText( this, wxID_ANY, wxT("Codigo Producto"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2712->Wrap( -1 );
+	bSizer5412->Add( m_staticText2712, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CodigoPedido3 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5412->Add( CodigoPedido3, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer532->Add( bSizer5412, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer5442;
+	bSizer5442 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2742 = new wxStaticText( this, wxID_ANY, wxT("Cantidad"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2742->Wrap( -1 );
+	bSizer5442->Add( m_staticText2742, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CantidadPedido3 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5442->Add( CantidadPedido3, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer532->Add( bSizer5442, 1, wxEXPAND, 5 );
+	
+	
+	bSizer50->Add( bSizer532, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer533;
+	bSizer533 = new wxBoxSizer( wxHORIZONTAL );
+	
+	wxBoxSizer* bSizer5413;
+	bSizer5413 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2713 = new wxStaticText( this, wxID_ANY, wxT("Codigo Producto"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2713->Wrap( -1 );
+	bSizer5413->Add( m_staticText2713, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CodigoPedido4 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5413->Add( CodigoPedido4, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer533->Add( bSizer5413, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer5443;
+	bSizer5443 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2743 = new wxStaticText( this, wxID_ANY, wxT("Cantidad"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2743->Wrap( -1 );
+	bSizer5443->Add( m_staticText2743, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CantidadPedido4 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5443->Add( CantidadPedido4, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer533->Add( bSizer5443, 1, wxEXPAND, 5 );
+	
+	
+	bSizer50->Add( bSizer533, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer534;
+	bSizer534 = new wxBoxSizer( wxHORIZONTAL );
+	
+	wxBoxSizer* bSizer5414;
+	bSizer5414 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2714 = new wxStaticText( this, wxID_ANY, wxT("Codigo Producto"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2714->Wrap( -1 );
+	bSizer5414->Add( m_staticText2714, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CodigoPedido5 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5414->Add( CodigoPedido5, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer534->Add( bSizer5414, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer5444;
+	bSizer5444 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2744 = new wxStaticText( this, wxID_ANY, wxT("Cantidad"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2744->Wrap( -1 );
+	bSizer5444->Add( m_staticText2744, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CantidadPedido5 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5444->Add( CantidadPedido5, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer534->Add( bSizer5444, 1, wxEXPAND, 5 );
+	
+	
+	bSizer50->Add( bSizer534, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer535;
+	bSizer535 = new wxBoxSizer( wxHORIZONTAL );
+	
+	wxBoxSizer* bSizer5415;
+	bSizer5415 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2715 = new wxStaticText( this, wxID_ANY, wxT("Codigo Producto"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2715->Wrap( -1 );
+	bSizer5415->Add( m_staticText2715, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CodigoPedido6 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5415->Add( CodigoPedido6, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer535->Add( bSizer5415, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer5445;
+	bSizer5445 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2745 = new wxStaticText( this, wxID_ANY, wxT("Cantidad"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2745->Wrap( -1 );
+	bSizer5445->Add( m_staticText2745, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CantidadPedido6 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5445->Add( CantidadPedido6, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer535->Add( bSizer5445, 1, wxEXPAND, 5 );
+	
+	
+	bSizer50->Add( bSizer535, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer536;
+	bSizer536 = new wxBoxSizer( wxHORIZONTAL );
+	
+	wxBoxSizer* bSizer5416;
+	bSizer5416 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2716 = new wxStaticText( this, wxID_ANY, wxT("Codigo Producto"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2716->Wrap( -1 );
+	bSizer5416->Add( m_staticText2716, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CodigoPedido7 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5416->Add( CodigoPedido7, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer536->Add( bSizer5416, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer5446;
+	bSizer5446 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2746 = new wxStaticText( this, wxID_ANY, wxT("Cantidad"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2746->Wrap( -1 );
+	bSizer5446->Add( m_staticText2746, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CantidadPedido7 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5446->Add( CantidadPedido7, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer536->Add( bSizer5446, 1, wxEXPAND, 5 );
+	
+	
+	bSizer50->Add( bSizer536, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer59;
+	bSizer59 = new wxBoxSizer( wxVERTICAL );
+	
+	wxBoxSizer* bSizer543;
+	bSizer543 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText273 = new wxStaticText( this, wxID_ANY, wxT("DNI Cliente"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText273->Wrap( -1 );
+	bSizer543->Add( m_staticText273, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	DniClientePedido = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer543->Add( DniClientePedido, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer59->Add( bSizer543, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer5431;
+	bSizer5431 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText2731 = new wxStaticText( this, wxID_ANY, wxT("Categoria (Distribuidora=1,Prof.=2,Public.=3)"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2731->Wrap( -1 );
+	bSizer5431->Add( m_staticText2731, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	CategoriaPedido = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5431->Add( CategoriaPedido, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer59->Add( bSizer5431, 1, wxEXPAND, 5 );
+	
+	
+	bSizer50->Add( bSizer59, 1, wxEXPAND, 5 );
+	
 	wxBoxSizer* bSizer51;
 	bSizer51 = new wxBoxSizer( wxHORIZONTAL );
 	
-	AceptarPedido = new wxButton( this, wxID_ANY, wxT("Aceptar"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer51->Add( AceptarPedido, 0, wxALL, 5 );
-	
 	CancelarPedido = new wxButton( this, wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer51->Add( CancelarPedido, 0, wxALL, 5 );
+	
+	AceptarPedido = new wxButton( this, wxID_ANY, wxT("Terminar Factura"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer51->Add( AceptarPedido, 0, wxALL, 5 );
 	
 	
 	bSizer50->Add( bSizer51, 0, wxALIGN_RIGHT, 5 );
@@ -653,15 +840,15 @@ Base_AgregarPedido::Base_AgregarPedido( wxWindow* parent, wxWindowID id, const w
 	this->Centre( wxBOTH );
 	
 	// Connect Events
-	AceptarPedido->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AgregarPedido::ClickAceptarPedido ), NULL, this );
 	CancelarPedido->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AgregarPedido::ClickCancelarPedido ), NULL, this );
+	AceptarPedido->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AgregarPedido::ClickAceptarPedido ), NULL, this );
 }
 
 Base_AgregarPedido::~Base_AgregarPedido()
 {
 	// Disconnect Events
-	AceptarPedido->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AgregarPedido::ClickAceptarPedido ), NULL, this );
 	CancelarPedido->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AgregarPedido::ClickCancelarPedido ), NULL, this );
+	AceptarPedido->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AgregarPedido::ClickAceptarPedido ), NULL, this );
 	
 }
 
@@ -675,7 +862,7 @@ Base_VerPedidos::Base_VerPedidos( wxWindow* parent, wxWindowID id, const wxStrin
 	m_grillaPedidos = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 	
 	// Grid
-	m_grillaPedidos->CreateGrid( 0, 8 );
+	m_grillaPedidos->CreateGrid( 0, 7 );
 	m_grillaPedidos->EnableEditing( true );
 	m_grillaPedidos->EnableGridLines( true );
 	m_grillaPedidos->EnableDragGridSize( false );
@@ -686,22 +873,19 @@ Base_VerPedidos::Base_VerPedidos( wxWindow* parent, wxWindowID id, const wxStrin
 	m_grillaPedidos->SetColSize( 1, 99 );
 	m_grillaPedidos->SetColSize( 2, 105 );
 	m_grillaPedidos->SetColSize( 3, 123 );
-	m_grillaPedidos->SetColSize( 4, 67 );
-	m_grillaPedidos->SetColSize( 5, 80 );
+	m_grillaPedidos->SetColSize( 4, 87 );
+	m_grillaPedidos->SetColSize( 5, 87 );
 	m_grillaPedidos->SetColSize( 6, 80 );
-	m_grillaPedidos->SetColSize( 7, 82 );
 	m_grillaPedidos->EnableDragColMove( false );
 	m_grillaPedidos->EnableDragColSize( true );
 	m_grillaPedidos->SetColLabelSize( 30 );
 	m_grillaPedidos->SetColLabelValue( 0, wxT("Fecha") );
 	m_grillaPedidos->SetColLabelValue( 1, wxT("DNI Cliente") );
-	m_grillaPedidos->SetColLabelValue( 2, wxT("Codigo Producto") );
-	m_grillaPedidos->SetColLabelValue( 3, wxT("Categoria") );
-	m_grillaPedidos->SetColLabelValue( 4, wxT("Cantidad") );
-	m_grillaPedidos->SetColLabelValue( 5, wxT("Pagado") );
-	m_grillaPedidos->SetColLabelValue( 6, wxT("A Deuda") );
-	m_grillaPedidos->SetColLabelValue( 7, wxT("Total") );
-	m_grillaPedidos->SetColLabelValue( 8, wxEmptyString );
+	m_grillaPedidos->SetColLabelValue( 2, wxT("Num Factura") );
+	m_grillaPedidos->SetColLabelValue( 3, wxT("Codigo Producto") );
+	m_grillaPedidos->SetColLabelValue( 4, wxT("Categoria") );
+	m_grillaPedidos->SetColLabelValue( 5, wxT("Cantidad") );
+	m_grillaPedidos->SetColLabelValue( 6, wxT("Total") );
 	m_grillaPedidos->SetColLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
 	
 	// Rows
@@ -713,7 +897,7 @@ Base_VerPedidos::Base_VerPedidos( wxWindow* parent, wxWindowID id, const wxStrin
 	
 	// Cell Defaults
 	m_grillaPedidos->SetDefaultCellFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Bahnschrift") ) );
-	m_grillaPedidos->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	m_grillaPedidos->SetDefaultCellAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
 	bSizer49->Add( m_grillaPedidos, 1, wxEXPAND|wxALL, 5 );
 	
 	CerrarPedido = new wxButton( this, wxID_ANY, wxT("Cerrar"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -914,5 +1098,78 @@ Base_AgregarProducto::~Base_AgregarProducto()
 	// Disconnect Events
 	AceptarProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AgregarProducto::ClickAceptarProducto ), NULL, this );
 	CancelarProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AgregarProducto::ClickCancelarProducto ), NULL, this );
+	
+}
+
+Base_VerFacturas::Base_VerFacturas( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxBoxSizer* bSizer76;
+	bSizer76 = new wxBoxSizer( wxVERTICAL );
+	
+	m_grillaFacturas = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
+	
+	// Grid
+	m_grillaFacturas->CreateGrid( 0, 4 );
+	m_grillaFacturas->EnableEditing( true );
+	m_grillaFacturas->EnableGridLines( true );
+	m_grillaFacturas->EnableDragGridSize( false );
+	m_grillaFacturas->SetMargins( 0, 0 );
+	
+	// Columns
+	m_grillaFacturas->SetColSize( 0, 152 );
+	m_grillaFacturas->SetColSize( 1, 159 );
+	m_grillaFacturas->SetColSize( 2, 156 );
+	m_grillaFacturas->SetColSize( 3, 112 );
+	m_grillaFacturas->EnableDragColMove( false );
+	m_grillaFacturas->EnableDragColSize( true );
+	m_grillaFacturas->SetColLabelSize( 30 );
+	m_grillaFacturas->SetColLabelValue( 0, wxT("Fecha") );
+	m_grillaFacturas->SetColLabelValue( 1, wxT("Numero de Factura") );
+	m_grillaFacturas->SetColLabelValue( 2, wxT("DNI Cliente") );
+	m_grillaFacturas->SetColLabelValue( 3, wxT("Total") );
+	m_grillaFacturas->SetColLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
+	
+	// Rows
+	m_grillaFacturas->EnableDragRowSize( true );
+	m_grillaFacturas->SetRowLabelSize( 0 );
+	m_grillaFacturas->SetRowLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
+	
+	// Label Appearance
+	
+	// Cell Defaults
+	m_grillaFacturas->SetDefaultCellFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Bahnschrift SemiLight") ) );
+	m_grillaFacturas->SetDefaultCellAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
+	bSizer76->Add( m_grillaFacturas, 1, wxALL|wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer77;
+	bSizer77 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_button18 = new wxButton( this, wxID_ANY, wxT("Ver Factura"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer77->Add( m_button18, 0, wxALL, 5 );
+	
+	m_button19 = new wxButton( this, wxID_ANY, wxT("Cerrar"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer77->Add( m_button19, 0, wxALL, 5 );
+	
+	
+	bSizer76->Add( bSizer77, 0, wxALIGN_RIGHT, 5 );
+	
+	
+	this->SetSizer( bSizer76 );
+	this->Layout();
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_button18->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_VerFacturas::ClickVerFactura ), NULL, this );
+	m_button19->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_VerFacturas::ClickCerrarVerFacturas ), NULL, this );
+}
+
+Base_VerFacturas::~Base_VerFacturas()
+{
+	// Disconnect Events
+	m_button18->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_VerFacturas::ClickVerFactura ), NULL, this );
+	m_button19->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_VerFacturas::ClickCerrarVerFacturas ), NULL, this );
 	
 }

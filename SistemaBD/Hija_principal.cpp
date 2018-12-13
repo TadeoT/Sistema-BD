@@ -8,12 +8,16 @@
 #include "Hija_AgregarPedido.h"
 #include "Hija_VerPedidos.h"
 #include "Hija_AgregarProducto.h"
+#include <wx/icon.h>
+#include "Hija_VerFacturas.h"
 using namespace std;
 
 Hija_principal::Hija_principal(BD *BaseDatos) : Base_principal(NULL), m_BaseDatos(BaseDatos)
 {
-	refrescarGrillaCliente();
 	
+	SetIcon(wxIcon("icono.ico"));
+	
+	refrescarGrillaCliente();
 	refrescarGrillaProducto();
 	
 }
@@ -142,7 +146,11 @@ void Hija_principal::ClickMenuAgregarPedido( wxCommandEvent& event )  {
 }
 
 void Hija_principal::ClickMenuVerPedido( wxCommandEvent& event )  {
-	Hija_VerPedidos *win = new Hija_VerPedidos(this,m_BaseDatos);
+	Hija_VerFacturas *win = new Hija_VerFacturas(this,m_BaseDatos);
 	win->ShowModal();
+}
+
+void Hija_principal::OnCambiaTamanio( wxSizeEvent& event )  {
+	event.Skip();
 }
 

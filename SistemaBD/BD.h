@@ -61,6 +61,7 @@ public:
 	int CantidadDatos_cliente();
 	int CantidadDatos_producto();
 	int CantidadDatos_pedido();
+	int NumeroFacturaAnterior();
 	/// @brief Agrega un registro
 	std::string AgregarCliente(const Cliente &p);
 	std::string AgregarProducto(const Producto &p);
@@ -83,6 +84,8 @@ public:
 	/// @brief Ordena el vector
 	void OrdenarCliente(CriterioOrdenCliente criterio);
 	void OrdenarProducto(CriterioOrdenProducto criterio);
+
+	void RecargarVectores();
 
 
 	// funciones para busquedas
