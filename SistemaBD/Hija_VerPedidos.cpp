@@ -1,12 +1,13 @@
 #include "Hija_VerPedidos.h"
 #include "Pedido.h"
 #include <sstream>
+#include <iostream>
+#include "string_conv.h"
 using namespace std;
 
-Hija_VerPedidos::Hija_VerPedidos(wxWindow *parent, BD *BaseDatos) : Base_VerPedidos(parent), m_BaseDatos(BaseDatos) {
-	
-	for (int i = m_BaseDatos->CantidadDatos_pedido() - 1 ;i>=0;i--){
-		int e=(m_BaseDatos->CantidadDatos_pedido()-1) - i;
+Hija_VerPedidos::Hija_VerPedidos(wxWindow *parent, BD *BaseDatos,int &f) : Base_VerPedidos(parent), m_BaseDatos(BaseDatos),fila(f) {
+		int e=0; float totalF=0;
+	for (int i = m_BaseDatos->ComienzoPedido(f);i<(m_BaseDatos->ComienzoPedido(f)+m_BaseDatos->CantidadPedidosPorFactura(f));i++){
 		
 		Pedido &p = m_BaseDatos->VerPedido(i);
 		m_grillaPedidos->AppendRows();
@@ -43,12 +44,18 @@ Hija_VerPedidos::Hija_VerPedidos(wxWindow *parent, BD *BaseDatos) : Base_VerPedi
 		string s_cantidad = ss_cantidad.str();
 		m_grillaPedidos->SetCellValue(e,5,s_cantidad);
 		
-		
+		totalF=p.Vertotal()+totalF;
 		stringstream ss_total("");
 		ss_total<<"$ " <<p.Vertotal();
 		string s_total = ss_total.str();
 		m_grillaPedidos->SetCellValue(e,6,s_total);
+		
+		e++;
 	}
+	stringstream ss_total("");
+	ss_total<<totalF;
+	string s_total = ss_total.str();
+	TotalFinalPedidos->SetValue( std_to_wx(s_total ));
 	
 }
 

@@ -240,6 +240,49 @@ void BD::EliminarPedido(int i){
 	arregloPedido.erase(arregloPedido.begin()+i);
 }
 
+Pedido BD::VerFactura(int i){
+
+	int dni,dia,mes,anio,cantidad=1;
+	float total;
+
+	auto it = find_if(arregloPedido.begin(),arregloPedido.end(),[&i](const Pedido& p){ return p.VernumeroFactura() == i;});
+	auto index = std::distance(arregloPedido.begin(), it);
+	dni = arregloPedido[index].VerdniCliente();
+	dia= arregloPedido[index].Verdia();
+	mes= arregloPedido[index].Vermes();
+	anio= arregloPedido[index].Veranio();
+
+	Pedido p(dni,0,0,cantidad,1,i);
+	p.ModificarFecha(dia,mes,anio);
+
+	return p;
+}
+
+int BD::CantidadPedidosPorFactura(int f){
+	int factura = f,contador=0;
+
+	auto it = find_if(arregloPedido.begin(),arregloPedido.end(),[&factura](const Pedido& p){ return p.VernumeroFactura() == factura;});
+	while (it != arregloPedido.end()){
+		contador++;
+		it = std::find_if (++it,arregloPedido.end(),[&factura](const Pedido& p){ return p.VernumeroFactura() == factura;});
+	}
+	return contador;
+}
+
+int BD::ComienzoPedido(int f){
+	int factura = f;
+
+	auto it = find_if(arregloPedido.begin(),arregloPedido.end(),[&factura](const Pedido& p){ return p.VernumeroFactura() == factura;});
+	auto index = std::distance(arregloPedido.begin(), it);
+	return index;
+
+
+}
+
+
+
+
+
 void BD::RecargarVectores(){
 std::ifstream archivo_cliente (nombre_archivo_cliente.c_str(),std::ios::binary|std::ios::ate);
 if (archivo_cliente.is_open()) {

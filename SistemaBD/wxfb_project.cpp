@@ -900,6 +900,19 @@ Base_VerPedidos::Base_VerPedidos( wxWindow* parent, wxWindowID id, const wxStrin
 	m_grillaPedidos->SetDefaultCellAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
 	bSizer49->Add( m_grillaPedidos, 1, wxEXPAND|wxALL, 5 );
 	
+	wxBoxSizer* bSizer78;
+	bSizer78 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText46 = new wxStaticText( this, wxID_ANY, wxT("Total Final:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText46->Wrap( -1 );
+	bSizer78->Add( m_staticText46, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	TotalFinalPedidos = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer78->Add( TotalFinalPedidos, 1, wxALL|wxEXPAND, 5 );
+	
+	
+	bSizer49->Add( bSizer78, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
+	
 	CerrarPedido = new wxButton( this, wxID_ANY, wxT("Cerrar"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer49->Add( CerrarPedido, 0, wxALL|wxALIGN_RIGHT, 5 );
 	
@@ -1111,7 +1124,7 @@ Base_VerFacturas::Base_VerFacturas( wxWindow* parent, wxWindowID id, const wxStr
 	m_grillaFacturas = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 	
 	// Grid
-	m_grillaFacturas->CreateGrid( 0, 4 );
+	m_grillaFacturas->CreateGrid( 0, 3 );
 	m_grillaFacturas->EnableEditing( true );
 	m_grillaFacturas->EnableGridLines( true );
 	m_grillaFacturas->EnableDragGridSize( false );
@@ -1119,16 +1132,14 @@ Base_VerFacturas::Base_VerFacturas( wxWindow* parent, wxWindowID id, const wxStr
 	
 	// Columns
 	m_grillaFacturas->SetColSize( 0, 152 );
-	m_grillaFacturas->SetColSize( 1, 159 );
-	m_grillaFacturas->SetColSize( 2, 156 );
-	m_grillaFacturas->SetColSize( 3, 112 );
+	m_grillaFacturas->SetColSize( 1, 205 );
+	m_grillaFacturas->SetColSize( 2, 177 );
 	m_grillaFacturas->EnableDragColMove( false );
 	m_grillaFacturas->EnableDragColSize( true );
 	m_grillaFacturas->SetColLabelSize( 30 );
 	m_grillaFacturas->SetColLabelValue( 0, wxT("Fecha") );
 	m_grillaFacturas->SetColLabelValue( 1, wxT("Numero de Factura") );
 	m_grillaFacturas->SetColLabelValue( 2, wxT("DNI Cliente") );
-	m_grillaFacturas->SetColLabelValue( 3, wxT("Total") );
 	m_grillaFacturas->SetColLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
 	
 	// Rows

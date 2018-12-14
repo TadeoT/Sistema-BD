@@ -67,13 +67,17 @@ public:
 	std::string AgregarProducto(const Producto &p);
 	std::string AgregarPedido(Pedido &p);
 
-	/// @brief Devuelve un registro para ver o modificar
-	//Cliente &operator[](int i);
-	//Producto &operator[](int i);
+
 	/// @brief Devuelve un registro para ver o modificar
 	Cliente &VerCliente(int i);
 	Producto &VerProducto(int i);
 	Pedido &VerPedido(int i);
+
+
+	//Cosas de Facturas pero las q no se comen :(
+	Pedido VerFactura(int i);
+	int CantidadPedidosPorFactura(int f);
+	int ComienzoPedido(int f);
 
 
 	/// @brief Quita una Cliente de la base de datos

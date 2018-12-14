@@ -216,6 +216,8 @@ class Base_VerPedidos : public wxDialog
 	
 	protected:
 		wxGrid* m_grillaPedidos;
+		wxStaticText* m_staticText46;
+		wxTextCtrl* TotalFinalPedidos;
 		wxButton* CerrarPedido;
 		
 		// Virtual event handlers, overide them in your derived class
@@ -293,7 +295,7 @@ class Base_VerFacturas : public wxDialog
 	
 	public:
 		
-		Base_VerFacturas( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Facturas Realizadas"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 714,548 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		Base_VerFacturas( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Facturas Realizadas"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 580,548 ), long style = wxDEFAULT_DIALOG_STYLE ); 
 		~Base_VerFacturas();
 	
 };
