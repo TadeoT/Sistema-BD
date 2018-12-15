@@ -133,10 +133,6 @@ class Base_ModificarCliente : public wxDialog
 		wxTextCtrl* m_localidadC;
 		wxStaticText* m_staticText75;
 		wxTextCtrl* m_emailC;
-		wxStaticText* m_staticText76;
-		wxTextCtrl* m_dniC;
-		wxStaticText* Saldo;
-		wxTextCtrl* m_dniC1;
 		wxButton* AceptarCliente;
 		wxButton* CancelarCliente;
 		

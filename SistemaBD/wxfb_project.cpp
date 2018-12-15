@@ -422,10 +422,10 @@ Base_ModificarCliente::Base_ModificarCliente( wxWindow* parent, wxWindowID id, c
 	
 	m_staticText7 = new wxStaticText( this, wxID_ANY, wxT("Apellido"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText7->Wrap( -1 );
-	bSizer21->Add( m_staticText7, 0, wxALL|wxEXPAND, 5 );
+	bSizer21->Add( m_staticText7, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_apellidoC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer21->Add( m_apellidoC, 1, wxALL|wxEXPAND, 5 );
+	bSizer21->Add( m_apellidoC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer21, 1, wxEXPAND, 5 );
@@ -435,10 +435,10 @@ Base_ModificarCliente::Base_ModificarCliente( wxWindow* parent, wxWindowID id, c
 	
 	m_staticText71 = new wxStaticText( this, wxID_ANY, wxT("Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText71->Wrap( -1 );
-	bSizer211->Add( m_staticText71, 0, wxALL|wxEXPAND, 5 );
+	bSizer211->Add( m_staticText71, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_nombreC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer211->Add( m_nombreC, 1, wxALL|wxEXPAND, 5 );
+	bSizer211->Add( m_nombreC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer211, 1, wxEXPAND, 5 );
@@ -448,10 +448,10 @@ Base_ModificarCliente::Base_ModificarCliente( wxWindow* parent, wxWindowID id, c
 	
 	m_staticText72 = new wxStaticText( this, wxID_ANY, wxT("Telefono"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText72->Wrap( -1 );
-	bSizer212->Add( m_staticText72, 0, wxALL|wxEXPAND, 5 );
+	bSizer212->Add( m_staticText72, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_telC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer212->Add( m_telC, 1, wxALL|wxEXPAND, 5 );
+	bSizer212->Add( m_telC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer212, 1, wxEXPAND, 5 );
@@ -461,10 +461,10 @@ Base_ModificarCliente::Base_ModificarCliente( wxWindow* parent, wxWindowID id, c
 	
 	m_staticText73 = new wxStaticText( this, wxID_ANY, wxT("Direccion"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText73->Wrap( -1 );
-	bSizer213->Add( m_staticText73, 0, wxALL|wxEXPAND, 5 );
+	bSizer213->Add( m_staticText73, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_direccionC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer213->Add( m_direccionC, 1, wxALL|wxEXPAND, 5 );
+	bSizer213->Add( m_direccionC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer213, 1, wxEXPAND, 5 );
@@ -474,10 +474,10 @@ Base_ModificarCliente::Base_ModificarCliente( wxWindow* parent, wxWindowID id, c
 	
 	m_staticText74 = new wxStaticText( this, wxID_ANY, wxT("Localidad"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText74->Wrap( -1 );
-	bSizer214->Add( m_staticText74, 0, wxALL|wxEXPAND, 5 );
+	bSizer214->Add( m_staticText74, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_localidadC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer214->Add( m_localidadC, 1, wxALL|wxEXPAND, 5 );
+	bSizer214->Add( m_localidadC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer214, 1, wxEXPAND, 5 );
@@ -487,39 +487,13 @@ Base_ModificarCliente::Base_ModificarCliente( wxWindow* parent, wxWindowID id, c
 	
 	m_staticText75 = new wxStaticText( this, wxID_ANY, wxT("Email    "), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText75->Wrap( -1 );
-	bSizer215->Add( m_staticText75, 0, wxALL|wxEXPAND, 5 );
+	bSizer215->Add( m_staticText75, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_emailC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer215->Add( m_emailC, 1, wxALL|wxEXPAND, 5 );
+	bSizer215->Add( m_emailC, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	
 	bSizer20->Add( bSizer215, 1, wxEXPAND, 5 );
-	
-	wxBoxSizer* bSizer216;
-	bSizer216 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText76 = new wxStaticText( this, wxID_ANY, wxT("DNI     "), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText76->Wrap( -1 );
-	bSizer216->Add( m_staticText76, 0, wxALL|wxEXPAND, 5 );
-	
-	m_dniC = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer216->Add( m_dniC, 1, wxALL|wxEXPAND, 5 );
-	
-	
-	bSizer20->Add( bSizer216, 1, wxEXPAND, 5 );
-	
-	wxBoxSizer* bSizer2161;
-	bSizer2161 = new wxBoxSizer( wxHORIZONTAL );
-	
-	Saldo = new wxStaticText( this, wxID_ANY, wxT("Saldo  "), wxDefaultPosition, wxDefaultSize, 0 );
-	Saldo->Wrap( -1 );
-	bSizer2161->Add( Saldo, 0, wxALL|wxEXPAND, 5 );
-	
-	m_dniC1 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer2161->Add( m_dniC1, 1, wxALL|wxEXPAND, 5 );
-	
-	
-	bSizer20->Add( bSizer2161, 1, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer62;
 	bSizer62 = new wxBoxSizer( wxHORIZONTAL );
@@ -527,10 +501,10 @@ Base_ModificarCliente::Base_ModificarCliente( wxWindow* parent, wxWindowID id, c
 	wxBoxSizer* bSizer63;
 	bSizer63 = new wxBoxSizer( wxHORIZONTAL );
 	
-	AceptarCliente = new wxButton( this, wxID_ANY, wxT("Aceptar"), wxDefaultPosition, wxDefaultSize, 0 );
+	AceptarCliente = new wxButton( this, wxID_ANY, wxT("Guardar"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer63->Add( AceptarCliente, 0, wxALL, 5 );
 	
-	CancelarCliente = new wxButton( this, wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
+	CancelarCliente = new wxButton( this, wxID_ANY, wxT("Volver"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer63->Add( CancelarCliente, 0, wxALL, 5 );
 	
 	

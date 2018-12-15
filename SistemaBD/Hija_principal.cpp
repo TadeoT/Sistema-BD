@@ -34,9 +34,10 @@ void Hija_principal::ClickAgregarCliente( wxCommandEvent& event )  {
 }
 
 void Hija_principal::ClickModificarCliente( wxCommandEvent& event )  {
-	Hija_ModificarCliente *win= new Hija_ModificarCliente(this,m_BaseDatos);
+	int f = m_grillaClientes->GetGridCursorRow();
+	Hija_ModificarCliente *win= new Hija_ModificarCliente(this,m_BaseDatos,f);
 	if (win->ShowModal()==1){
-		refrescarGrillaProducto();
+		refrescarGrillaCliente();
 	}
 }
 

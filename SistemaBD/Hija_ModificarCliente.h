@@ -7,12 +7,13 @@ class Hija_ModificarCliente : public Base_ModificarCliente {
 	
 private:
 	BD *m_BaseDatos;
+	int cual_p;
 protected:
 	void ClickAceptarCliente( wxCommandEvent& event )  override;
 	void ClickCancerlarCliente( wxCommandEvent& event )  override;
 	
 public:
-	Hija_ModificarCliente(wxWindow *parent,BD *BaseDatos);
+	Hija_ModificarCliente(wxWindow *parent,BD *BaseDatos,int &f);
 	~Hija_ModificarCliente();
 };
 
