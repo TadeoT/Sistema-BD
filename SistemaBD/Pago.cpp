@@ -70,5 +70,6 @@ void Pago::LeerDesdeBinario(std::ifstream &archivo) {
 std::string Pago::ValidarDatos() {
 	std::string errores;
   if (dniCliente<0 || dniCliente>99999999) errores+="Dni debe estar entre 0 y 99999999 \n";
+  if (total==0) errores+="Pago No puede ser $0 \n";
 	return errores;
 }

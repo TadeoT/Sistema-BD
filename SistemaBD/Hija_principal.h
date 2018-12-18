@@ -8,6 +8,9 @@ class Hija_principal : public Base_principal {
 private:
 	
 protected:
+	void ClickAumentoPrecioPorcentaje( wxCommandEvent& event )  override;
+	void ClickAcercaDe( wxCommandEvent& event )  override;
+	void ClickVerPagos( wxCommandEvent& event )  override;
 	void ClickAgregarPago( wxCommandEvent& event )  override;
 	void ClickBuscarCliente( wxCommandEvent& event )  override;
 	void ClickBuscarProducto( wxCommandEvent& event )  override;

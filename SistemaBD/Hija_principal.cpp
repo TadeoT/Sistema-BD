@@ -13,6 +13,9 @@
 #include "Hija_ModificarProducto.h"
 #include "string_conv.h"
 #include "Hija_AgregarPago.h"
+#include "Hija_VerPagos.h"
+#include "Hija_AcercaDe.h"
+#include "Hija_AumentoPorcentaje.h"
 using namespace std;
 
 Hija_principal::Hija_principal(BD *BaseDatos) : Base_principal(NULL), m_BaseDatos(BaseDatos)
@@ -48,8 +51,9 @@ void Hija_principal::ClickEliminarCliente( wxCommandEvent& event )  {
 	int f = m_grillaClientes->GetGridCursorRow();
 	int x = wxMessageBox("Esta Seguro?","Advertencia",wxYES_NO|wxICON_QUESTION);
 	if (x==wxYES){
-	m_BaseDatos->EliminarCliente(f);
+	string error = m_BaseDatos->EliminarCliente(f);
 	m_BaseDatos->Guardar_cliente();
+	wxMessageBox(error);
 	refrescarGrillaCliente();
 	}
 }
@@ -201,5 +205,22 @@ void Hija_principal::ClickAgregarPago( wxCommandEvent& event )  {
 	if (win->ShowModal()==1){
 		refrescarGrillaCliente();
 	}
+}
+
+void Hija_principal::ClickVerPagos( wxCommandEvent& event )  {
+	Hija_VerPagos *win = new Hija_VerPagos (this,m_BaseDatos);
+	win->ShowModal();
+}
+
+void Hija_principal::ClickAumentoPrecioPorcentaje( wxCommandEvent& event )  {
+	Hija_AumentoPorcentaje *win = new Hija_AumentoPorcentaje(this,m_BaseDatos);
+	if(win->ShowModal() == 1){
+		refrescarGrillaProducto();
+	}
+}
+
+void Hija_principal::ClickAcercaDe( wxCommandEvent& event )  {
+	Hija_AcercaDe *win = new Hija_AcercaDe(this);
+	win->ShowModal();
 }
 

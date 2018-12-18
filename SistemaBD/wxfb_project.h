@@ -41,6 +41,7 @@ class Base_principal : public wxFrame
 		wxMenuBar* m_menubar1;
 		wxMenu* MenuPedidos;
 		wxMenu* MenuPagos;
+		wxMenu* m_menu3;
 		wxStaticText* m_staticText2;
 		wxStaticText* m_staticText21;
 		wxButton* m_button10;
@@ -62,6 +63,9 @@ class Base_principal : public wxFrame
 		virtual void ClickMenuAgregarPedido( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickMenuVerPedido( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickAgregarPago( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickVerPagos( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickAumentoPrecioPorcentaje( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickAcercaDe( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickBuscarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickAgregarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickModificarCliente( wxCommandEvent& event ) { event.Skip(); }
@@ -367,6 +371,77 @@ class Base_AgregarPago : public wxDialog
 		
 		Base_AgregarPago( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Ingresar Pago"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 563,217 ), long style = wxDEFAULT_DIALOG_STYLE ); 
 		~Base_AgregarPago();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class Base_VerPagos
+///////////////////////////////////////////////////////////////////////////////
+class Base_VerPagos : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxGrid* m_grillaPagos;
+		wxButton* CerrarPagos;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void ClickCerrarPagos( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		Base_VerPagos( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT(" Lista de Pagos"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 498,548 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~Base_VerPagos();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class Base_AumentoPorcentaje
+///////////////////////////////////////////////////////////////////////////////
+class Base_AumentoPorcentaje : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText57;
+		wxTextCtrl* PorcentajeAumento;
+		wxButton* m_button25;
+		wxButton* m_button26;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void ClickAceptarAumento( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickCancelarAumento( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		Base_AumentoPorcentaje( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Aumento Precio Porcentaje"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 616,182 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~Base_AumentoPorcentaje();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class Base_AcercaDe
+///////////////////////////////////////////////////////////////////////////////
+class Base_AcercaDe : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText58;
+		wxStaticText* m_staticText59;
+		wxStaticText* m_staticText60;
+		wxButton* m_button27;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void ClickCerrarAbout( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		Base_AcercaDe( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Datos"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 553,197 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~Base_AcercaDe();
 	
 };
 

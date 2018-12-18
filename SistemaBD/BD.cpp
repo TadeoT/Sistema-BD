@@ -292,9 +292,19 @@ void BD::OrdenarProducto(CriterioOrdenProducto criterio){
 
 //----------------------------------------------------------------------------
 
-void BD::EliminarCliente(int i) {
+std::string BD::EliminarCliente(int i) {
+	Cliente c = arregloCliente[i];
+	int dni = c.VerDni();
+
+	auto it =find_if(arregloPago.begin(),arregloPago.end(),[&dni](const Pago& p){ return p.VerdniCliente() == dni;});
+	auto ut=find_if(arregloPedido.begin(),arregloPedido.end(),[&dni](const Pedido& p){return p.VerdniCliente() == dni;});
+
+	if(it == arregloPago.end() && ut== arregloPedido.end()){
 	arregloCliente.erase(arregloCliente.begin()+i);
+	return "El Cliente se ha Eliminado Correctamente";
+}else return "Existe un Pago o Factura Asociado al Cliente que desea Eliminar";
 }
+
 void BD::EliminarProducto(int i){
 	arregloProducto.erase(arregloProducto.begin()+i);
 }
@@ -341,8 +351,16 @@ int BD::ComienzoPedido(int f){
 	auto it = find_if(arregloPedido.begin(),arregloPedido.end(),[&factura](const Pedido& p){ return p.VernumeroFactura() == factura;});
 	auto index = std::distance(arregloPedido.begin(), it);
 	return index;
+}
 
-
+void BD::AumentarPorPorcentajeProductos(float a_porcentaje){
+	float porcentaje = a_porcentaje;
+	for (int i=0;i<arregloProducto.size();i++){
+		float NuevoPrecioDi = arregloProducto[i].VerPrecio_di() + (arregloProducto[i].VerPrecio_di()*porcentaje);
+		float NuevoPrecioPr = arregloProducto[i].VerPrecio_pr() + (arregloProducto[i].VerPrecio_pr()*porcentaje);
+		float NuevoPrecioPu = arregloProducto[i].VerPrecio_pu() + (arregloProducto[i].VerPrecio_pu()*porcentaje);
+		arregloProducto[i].ModificarPrecio(NuevoPrecioDi,NuevoPrecioPr,NuevoPrecioPu);
+	}
 }
 
 

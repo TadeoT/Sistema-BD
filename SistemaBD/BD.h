@@ -86,9 +86,12 @@ public:
 	int CantidadPedidosPorFactura(int f);
 	int ComienzoPedido(int f);
 
+	//Aumenta por porcentaje todos los PRODUCTOS
+	void AumentarPorPorcentajeProductos(float a_porcentaje);
+
 
 	/// @brief Quita una Cliente de la base de datos
-	void EliminarCliente(int i);
+	std::string EliminarCliente(int i);
 	void EliminarProducto(int i);
 	void EliminarPedido(int i);
 	void EliminarPago(int i);

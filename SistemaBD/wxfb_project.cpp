@@ -30,7 +30,22 @@ Base_principal::Base_principal( wxWindow* parent, wxWindowID id, const wxString&
 	m_menuItem31 = new wxMenuItem( MenuPagos, wxID_ANY, wxString( wxT("Ingresar Pago") ) , wxEmptyString, wxITEM_NORMAL );
 	MenuPagos->Append( m_menuItem31 );
 	
+	wxMenuItem* ListaPagos;
+	ListaPagos = new wxMenuItem( MenuPagos, wxID_ANY, wxString( wxT("Lista Pagos") ) , wxEmptyString, wxITEM_NORMAL );
+	MenuPagos->Append( ListaPagos );
+	
 	m_menubar1->Append( MenuPagos, wxT("Menu Pagos") ); 
+	
+	m_menu3 = new wxMenu();
+	wxMenuItem* m_menuItem5;
+	m_menuItem5 = new wxMenuItem( m_menu3, wxID_ANY, wxString( wxT("Aumento Precio %") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu3->Append( m_menuItem5 );
+	
+	wxMenuItem* m_menuItem6;
+	m_menuItem6 = new wxMenuItem( m_menu3, wxID_ANY, wxString( wxT("Acerca De") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu3->Append( m_menuItem6 );
+	
+	m_menubar1->Append( m_menu3, wxT("Extras") ); 
 	
 	this->SetMenuBar( m_menubar1 );
 	
@@ -231,7 +246,7 @@ Base_principal::Base_principal( wxWindow* parent, wxWindowID id, const wxString&
 	AgregarProducto = new wxButton( this, wxID_ANY, wxT("Agregar"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer23->Add( AgregarProducto, 0, wxALL, 5 );
 	
-	ModificarProducto = new wxButton( this, wxID_ANY, wxT("Modificar"), wxDefaultPosition, wxDefaultSize, 0 );
+	ModificarProducto = new wxButton( this, wxID_ANY, wxT("Ver/Modificar"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer23->Add( ModificarProducto, 0, wxALL, 5 );
 	
 	EliminarProducto = new wxButton( this, wxID_ANY, wxT("Eliminar"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -260,6 +275,9 @@ Base_principal::Base_principal( wxWindow* parent, wxWindowID id, const wxString&
 	this->Connect( m_menuItem3->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickMenuAgregarPedido ) );
 	this->Connect( m_menuItem4->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickMenuVerPedido ) );
 	this->Connect( m_menuItem31->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickAgregarPago ) );
+	this->Connect( ListaPagos->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickVerPagos ) );
+	this->Connect( m_menuItem5->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickAumentoPrecioPorcentaje ) );
+	this->Connect( m_menuItem6->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickAcercaDe ) );
 	m_button10->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickBuscarCliente ), NULL, this );
 	AgregarCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickAgregarCliente ), NULL, this );
 	ModificarCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickModificarCliente ), NULL, this );
@@ -277,6 +295,9 @@ Base_principal::~Base_principal()
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickMenuAgregarPedido ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickMenuVerPedido ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickAgregarPago ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickVerPagos ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickAumentoPrecioPorcentaje ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickAcercaDe ) );
 	m_button10->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickBuscarCliente ), NULL, this );
 	AgregarCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickAgregarCliente ), NULL, this );
 	ModificarCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickModificarCliente ), NULL, this );
@@ -1401,5 +1422,173 @@ Base_AgregarPago::~Base_AgregarPago()
 	// Disconnect Events
 	Aceptar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AgregarPago::ClickAceptarPago ), NULL, this );
 	m_button23->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AgregarPago::ClickCancelarPago ), NULL, this );
+	
+}
+
+Base_VerPagos::Base_VerPagos( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxBoxSizer* bSizer93;
+	bSizer93 = new wxBoxSizer( wxVERTICAL );
+	
+	m_grillaPagos = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
+	
+	// Grid
+	m_grillaPagos->CreateGrid( 0, 3 );
+	m_grillaPagos->EnableEditing( true );
+	m_grillaPagos->EnableGridLines( true );
+	m_grillaPagos->EnableDragGridSize( false );
+	m_grillaPagos->SetMargins( 0, 0 );
+	
+	// Columns
+	m_grillaPagos->SetColSize( 0, 174 );
+	m_grillaPagos->SetColSize( 1, 159 );
+	m_grillaPagos->SetColSize( 2, 129 );
+	m_grillaPagos->EnableDragColMove( false );
+	m_grillaPagos->EnableDragColSize( true );
+	m_grillaPagos->SetColLabelSize( 30 );
+	m_grillaPagos->SetColLabelValue( 0, wxT("Fecha") );
+	m_grillaPagos->SetColLabelValue( 1, wxT("DNI Cliente") );
+	m_grillaPagos->SetColLabelValue( 2, wxT("Monto") );
+	m_grillaPagos->SetColLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
+	
+	// Rows
+	m_grillaPagos->EnableDragRowSize( true );
+	m_grillaPagos->SetRowLabelSize( 0 );
+	m_grillaPagos->SetRowLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
+	
+	// Label Appearance
+	
+	// Cell Defaults
+	m_grillaPagos->SetDefaultCellFont( wxFont( 10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
+	m_grillaPagos->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	bSizer93->Add( m_grillaPagos, 1, wxALL|wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer94;
+	bSizer94 = new wxBoxSizer( wxHORIZONTAL );
+	
+	CerrarPagos = new wxButton( this, wxID_ANY, wxT("Cerrar"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer94->Add( CerrarPagos, 0, wxALL, 5 );
+	
+	
+	bSizer93->Add( bSizer94, 0, wxALIGN_RIGHT, 5 );
+	
+	
+	this->SetSizer( bSizer93 );
+	this->Layout();
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	CerrarPagos->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_VerPagos::ClickCerrarPagos ), NULL, this );
+}
+
+Base_VerPagos::~Base_VerPagos()
+{
+	// Disconnect Events
+	CerrarPagos->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_VerPagos::ClickCerrarPagos ), NULL, this );
+	
+}
+
+Base_AumentoPorcentaje::Base_AumentoPorcentaje( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxBoxSizer* bSizer95;
+	bSizer95 = new wxBoxSizer( wxVERTICAL );
+	
+	wxBoxSizer* bSizer97;
+	bSizer97 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText57 = new wxStaticText( this, wxID_ANY, wxT("Porcentaje De Aumento (Ej: 0.20 , 0.30 , 0.90) "), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText57->Wrap( -1 );
+	bSizer97->Add( m_staticText57, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	PorcentajeAumento = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer97->Add( PorcentajeAumento, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	
+	bSizer95->Add( bSizer97, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer98;
+	bSizer98 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_button25 = new wxButton( this, wxID_ANY, wxT("Efectuar Aumento"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer98->Add( m_button25, 0, wxALL, 5 );
+	
+	m_button26 = new wxButton( this, wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer98->Add( m_button26, 0, wxALL, 5 );
+	
+	
+	bSizer95->Add( bSizer98, 0, wxALIGN_RIGHT, 5 );
+	
+	
+	this->SetSizer( bSizer95 );
+	this->Layout();
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_button25->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AumentoPorcentaje::ClickAceptarAumento ), NULL, this );
+	m_button26->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AumentoPorcentaje::ClickCancelarAumento ), NULL, this );
+}
+
+Base_AumentoPorcentaje::~Base_AumentoPorcentaje()
+{
+	// Disconnect Events
+	m_button25->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AumentoPorcentaje::ClickAceptarAumento ), NULL, this );
+	m_button26->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AumentoPorcentaje::ClickCancelarAumento ), NULL, this );
+	
+}
+
+Base_AcercaDe::Base_AcercaDe( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxBoxSizer* bSizer99;
+	bSizer99 = new wxBoxSizer( wxVERTICAL );
+	
+	wxBoxSizer* bSizer100;
+	bSizer100 = new wxBoxSizer( wxVERTICAL );
+	
+	m_staticText58 = new wxStaticText( this, wxID_ANY, wxT("Sistema DB "), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText58->Wrap( -1 );
+	bSizer100->Add( m_staticText58, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	m_staticText59 = new wxStaticText( this, wxID_ANY, wxT("Email de Contacto : tiraboschi.tadeo@gmail.com"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText59->Wrap( -1 );
+	bSizer100->Add( m_staticText59, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	m_staticText60 = new wxStaticText( this, wxID_ANY, wxT("Libre Distribucion"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText60->Wrap( -1 );
+	bSizer100->Add( m_staticText60, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	
+	bSizer99->Add( bSizer100, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer101;
+	bSizer101 = new wxBoxSizer( wxVERTICAL );
+	
+	m_button27 = new wxButton( this, wxID_ANY, wxT("Cerrar"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer101->Add( m_button27, 0, wxALL, 5 );
+	
+	
+	bSizer99->Add( bSizer101, 0, wxALIGN_RIGHT, 5 );
+	
+	
+	this->SetSizer( bSizer99 );
+	this->Layout();
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_button27->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AcercaDe::ClickCerrarAbout ), NULL, this );
+}
+
+Base_AcercaDe::~Base_AcercaDe()
+{
+	// Disconnect Events
+	m_button27->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_AcercaDe::ClickCerrarAbout ), NULL, this );
 	
 }
