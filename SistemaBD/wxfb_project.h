@@ -40,6 +40,7 @@ class Base_principal : public wxFrame
 	protected:
 		wxMenuBar* m_menubar1;
 		wxMenu* MenuPedidos;
+		wxMenu* MenuPagos;
 		wxStaticText* m_staticText2;
 		wxStaticText* m_staticText21;
 		wxButton* m_button10;
@@ -60,6 +61,7 @@ class Base_principal : public wxFrame
 		virtual void OnCambiaTamanio( wxSizeEvent& event ) { event.Skip(); }
 		virtual void ClickMenuAgregarPedido( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickMenuVerPedido( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickAgregarPago( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickBuscarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickAgregarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickModificarCliente( wxCommandEvent& event ) { event.Skip(); }
@@ -338,6 +340,33 @@ class Base_ModificarProducto : public wxDialog
 		
 		Base_ModificarProducto( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Modificar Producto"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 626,554 ), long style = wxDEFAULT_DIALOG_STYLE ); 
 		~Base_ModificarProducto();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class Base_AgregarPago
+///////////////////////////////////////////////////////////////////////////////
+class Base_AgregarPago : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText55;
+		wxTextCtrl* dniClientePago;
+		wxStaticText* m_staticText56;
+		wxTextCtrl* montoPago;
+		wxButton* Aceptar;
+		wxButton* m_button23;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void ClickAceptarPago( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickCancelarPago( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		Base_AgregarPago( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Ingresar Pago"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 563,217 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~Base_AgregarPago();
 	
 };
 

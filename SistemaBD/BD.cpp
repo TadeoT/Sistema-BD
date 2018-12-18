@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-BD::BD(std::string a_nombre_archivo_cliente,std::string a_nombre_archivo_producto,std::string a_nombre_archivo_pedido) {
+BD::BD(std::string a_nombre_archivo_cliente,std::string a_nombre_archivo_producto,std::string a_nombre_archivo_pedido,std::string a_nombre_archivo_pago) {
 	nombre_archivo_cliente = a_nombre_archivo_cliente;
 	std::ifstream archivo_cliente (nombre_archivo_cliente.c_str(),std::ios::binary|std::ios::ate);
 	if (archivo_cliente.is_open()) {
@@ -43,6 +43,17 @@ BD::BD(std::string a_nombre_archivo_cliente,std::string a_nombre_archivo_product
 			arregloPedido[i].LeerDesdeBinario(archivo_pedido);
 		archivo_pedido.close();
 	}
+	nombre_archivo_pago=a_nombre_archivo_pago;
+	std::ifstream archivo_pago (nombre_archivo_pago.c_str(),std::ios::binary|std::ios::ate);
+	if (archivo_pago.is_open()) {
+		int tamanio_archivo = archivo_pago.tellg();
+		int cantidad_pagos = tamanio_archivo/sizeof(registro_Pago);
+		arregloPago.resize(cantidad_pagos);
+		archivo_pago.seekg(0,std::ios::beg);
+		for (int i=0;i<cantidad_pagos;i++)
+			arregloPago[i].LeerDesdeBinario(archivo_pago);
+		archivo_pago.close();
+	}
 }
 
 bool BD::Guardar_cliente() {
@@ -72,6 +83,16 @@ bool BD::Guardar_pedido(){
 	archivo_pedido.close();
 	return true;
 }
+bool BD::Guardar_pago(){
+	std::ofstream archivo_pago(nombre_archivo_pago.c_str(),std::ios::binary|std::ios::trunc);
+	if (!archivo_pago.is_open()) return false;
+	int cantidad_pagos = CantidadDatos_pago();
+	for (int i=0;i<cantidad_pagos;i++)
+		arregloPago[i].GuardarEnBinario(archivo_pago);
+	archivo_pago.close();
+	return true;
+}
+
 
 //Cliente &BD::operator[](int i) {
 	//return arregloCliente[i];
@@ -89,6 +110,9 @@ Producto &BD::VerProducto(int i){
 Pedido &BD::VerPedido(int i){
 	return arregloPedido[i];
 }
+Pago &BD::VerPago(int i){
+	return arregloPago[i];
+}
 
 int BD::CantidadDatos_cliente() {
 	return arregloCliente.size();
@@ -99,9 +123,14 @@ int BD::CantidadDatos_producto(){
 int BD::CantidadDatos_pedido(){
 	return arregloPedido.size();
 }
+int BD::CantidadDatos_pago(){
+	return arregloPago.size();
+}
 int BD::NumeroFacturaAnterior(){
 	return arregloPedido[arregloPedido.size()-1].VernumeroFactura();
 }
+
+//------VERIFICACIONES PARA AGREGAR CLIENTES, PRODUCTOS, PEDIDOS Y PAGOS--------
 
 std::string BD::AgregarCliente(const Cliente &p) {
 	int dni = p.VerDni();
@@ -183,9 +212,27 @@ std::string BD::AgregarPedido( Pedido &p){
 	}
 	//------------------------NO EXISTE-------------------------------------------
 	else {return "No se encontro el DNI del cliente o el Codigo del producto \n";}
+	}
+
+	std::string BD::AgregarPago(const Pago &p){
+		int dni = p.VerdniCliente();
+		auto it =find_if(arregloCliente.begin(),arregloCliente.end(),[&dni](const Cliente& p){ return p.VerDni() == dni;});
+		auto index = std::distance(arregloCliente.begin(), it);
+
+		if(it == arregloCliente.end()){
+		return "No existe el DNI asociado al pago";
+	}else{
+			arregloPago.push_back(p);
+			float nuevoSaldo = arregloCliente[index].VerSaldo() + p.Vertotal();
+			arregloCliente[index].ModificarSaldo(nuevoSaldo);
+			return "Pago Ingresado";
+		}
+	}
 
 
-}
+
+
+
 
 //----------------BUSQUEDAD DE CLIENTES Y PRODUCTOS -------------------------------
 int BD::BuscarApellidoYNombre(std::string parte, int pos_desde) {
@@ -213,7 +260,7 @@ int BD::BuscarMarcaYNombre(std::string parte, int pos_desde) {
 	}
 	return NO_SE_ENCUENTRA;
 }
-//------------------------------------------------------------------------------------
+//-------------------------ORDENAR------------------------------------------------------
 
 void BD::OrdenarCliente(CriterioOrdenCliente criterio) {
 	switch (criterio) {
@@ -243,6 +290,7 @@ void BD::OrdenarProducto(CriterioOrdenProducto criterio){
 	};
 }
 
+//----------------------------------------------------------------------------
 
 void BD::EliminarCliente(int i) {
 	arregloCliente.erase(arregloCliente.begin()+i);
@@ -253,7 +301,11 @@ void BD::EliminarProducto(int i){
 void BD::EliminarPedido(int i){
 	arregloPedido.erase(arregloPedido.begin()+i);
 }
+void BD::EliminarPago(int i){
+	arregloPago.erase(arregloPago.begin()+i);
+}
 
+//-------------------COSAS DE FACTURA----------------------------------------
 Pedido BD::VerFactura(int i){
 
 	int dni,dia,mes,anio,cantidad=1;
@@ -295,7 +347,7 @@ int BD::ComienzoPedido(int f){
 
 
 
-
+//----------------------------------Recargar Todo----------------------------
 
 void BD::RecargarVectores(){
 std::ifstream archivo_cliente (nombre_archivo_cliente.c_str(),std::ios::binary|std::ios::ate);
@@ -327,5 +379,15 @@ if (archivo_pedido.is_open()) {
 	for (int i=0;i<cantidad_pedidos;i++)
 		arregloPedido[i].LeerDesdeBinario(archivo_pedido);
 	archivo_pedido.close();
+}
+std::ifstream archivo_pago (nombre_archivo_pago.c_str(),std::ios::binary|std::ios::ate);
+if (archivo_pago.is_open()) {
+	int tamanio_archivo = archivo_pago.tellg();
+	int cantidad_pagos = tamanio_archivo/sizeof(registro_Pago);
+	arregloPago.resize(cantidad_pagos);
+	archivo_pago.seekg(0,std::ios::beg);
+	for (int i=0;i<cantidad_pagos;i++)
+		arregloPago[i].LeerDesdeBinario(archivo_pago);
+	archivo_pago.close();
 }
 }

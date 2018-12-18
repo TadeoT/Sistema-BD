@@ -53,7 +53,7 @@ Hija_VerPedidos::Hija_VerPedidos(wxWindow *parent, BD *BaseDatos,int &f) : Base_
 		e++;
 	}
 	stringstream ss_total("");
-	ss_total<<totalF;
+	ss_total<<"$"<<totalF;
 	string s_total = ss_total.str();
 	TotalFinalPedidos->SetValue( std_to_wx(s_total ));
 	

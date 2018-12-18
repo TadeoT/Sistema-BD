@@ -14,6 +14,7 @@
 #include "Cliente.h"
 #include "Producto.h"
 #include "Pedido.h"
+#include "Pago.h"
 
 /// @brief constante para indicar que fall� una b�squeda
 #define NO_SE_ENCUENTRA -1
@@ -40,38 +41,44 @@ private:
 	std::string nombre_archivo_cliente;
 	std::string nombre_archivo_producto;
 	std::string nombre_archivo_pedido;
+	std::string nombre_archivo_pago;
 
 
 	/// @brief Contenedor STL para los datos
 	std::vector<Cliente> arregloCliente;
 	std::vector<Producto> arregloProducto;
 	std::vector<Pedido> arregloPedido;
+	std::vector<Pago> arregloPago;
 
 public:
 
 	/// @brief Crea el objeto y carga los datos desde un archivo
-	BD(std::string nombre_archivo_cliente,std::string nombre_archivo_producto,std::string nombre_archivo_pedido);
+	BD(std::string nombre_archivo_cliente,std::string nombre_archivo_producto,std::string nombre_archivo_pedido,std::string nombre_archivo_pago);
 
 	/// @brief Guarda los datos en el archivo
 	bool Guardar_cliente();
 	bool Guardar_producto();
 	bool Guardar_pedido();
+	bool Guardar_pago();
 
 	/// @brief Devuelve la cantidad de registros
 	int CantidadDatos_cliente();
 	int CantidadDatos_producto();
 	int CantidadDatos_pedido();
+	int CantidadDatos_pago();
 	int NumeroFacturaAnterior();
 	/// @brief Agrega un registro
 	std::string AgregarCliente(const Cliente &p);
 	std::string AgregarProducto(const Producto &p);
 	std::string AgregarPedido(Pedido &p);
+	std::string AgregarPago(const Pago &p);
 
 
 	/// @brief Devuelve un registro para ver o modificar
 	Cliente &VerCliente(int i);
 	Producto &VerProducto(int i);
 	Pedido &VerPedido(int i);
+	Pago &VerPago(int i);
 
 
 	//Cosas de Facturas pero las q no se comen :(
@@ -84,6 +91,7 @@ public:
 	void EliminarCliente(int i);
 	void EliminarProducto(int i);
 	void EliminarPedido(int i);
+	void EliminarPago(int i);
 
 	/// @brief Ordena el vector
 	void OrdenarCliente(CriterioOrdenCliente criterio);

@@ -12,6 +12,7 @@
 #include "Hija_VerFacturas.h"
 #include "Hija_ModificarProducto.h"
 #include "string_conv.h"
+#include "Hija_AgregarPago.h"
 using namespace std;
 
 Hija_principal::Hija_principal(BD *BaseDatos) : Base_principal(NULL), m_BaseDatos(BaseDatos)
@@ -194,4 +195,11 @@ void Hija_principal::ClickBuscarProducto( wxCommandEvent& event )  {
 	
 }
 
+
+void Hija_principal::ClickAgregarPago( wxCommandEvent& event )  {
+	Hija_AgregarPago *win = new Hija_AgregarPago (this,m_BaseDatos);
+	if (win->ShowModal()==1){
+		refrescarGrillaCliente();
+	}
+}
 
