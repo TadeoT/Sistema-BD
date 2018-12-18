@@ -43,14 +43,14 @@ class Base_principal : public wxFrame
 		wxStaticText* m_staticText2;
 		wxStaticText* m_staticText21;
 		wxButton* m_button10;
-		wxTextCtrl* m_textCtrl1;
+		wxTextCtrl* m_busquedadCliente;
 		wxGrid* m_grillaClientes;
 		wxButton* AgregarCliente;
 		wxButton* ModificarCliente;
 		wxButton* EliminarCliente;
 		wxStaticText* m_staticText3;
 		wxButton* m_button11;
-		wxTextCtrl* m_textCtrl2;
+		wxTextCtrl* m_busquedadProducto;
 		wxGrid* m_grillaProductos;
 		wxButton* AgregarProducto;
 		wxButton* ModificarProducto;
@@ -60,9 +60,11 @@ class Base_principal : public wxFrame
 		virtual void OnCambiaTamanio( wxSizeEvent& event ) { event.Skip(); }
 		virtual void ClickMenuAgregarPedido( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickMenuVerPedido( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickBuscarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickAgregarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickModificarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickEliminarCliente( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickBuscarProducto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickAgregarProducto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickModificarProducto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickEliminarProducto( wxCommandEvent& event ) { event.Skip(); }
@@ -293,6 +295,49 @@ class Base_VerFacturas : public wxDialog
 		
 		Base_VerFacturas( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Facturas Realizadas"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 580,548 ), long style = wxDEFAULT_DIALOG_STYLE ); 
 		~Base_VerFacturas();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class Base_ModificarProducto
+///////////////////////////////////////////////////////////////////////////////
+class Base_ModificarProducto : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText451;
+		wxTextCtrl* MarcaP;
+		wxStaticText* m_staticText452;
+		wxTextCtrl* NombreP;
+		wxStaticText* m_staticText453;
+		wxTextCtrl* DescripcionP;
+		wxStaticText* m_staticText454;
+		wxTextCtrl* ClasificacionP;
+		wxStaticText* m_staticText455;
+		wxTextCtrl* ComposicionP;
+		wxStaticText* m_staticText456;
+		wxTextCtrl* PresentacionP;
+		wxStaticText* m_staticText457;
+		wxTextCtrl* StockP;
+		wxStaticText* m_staticText458;
+		wxTextCtrl* Precio_diP;
+		wxStaticText* m_staticText459;
+		wxTextCtrl* Precio_prP;
+		wxStaticText* m_staticText4510;
+		wxTextCtrl* Precio_puP;
+		wxButton* AceptarProducto;
+		wxButton* CancelarProducto;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void ClickAceptarProducto( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ClickCancelarProducto( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		Base_ModificarProducto( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Modificar Producto"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 626,554 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~Base_ModificarProducto();
 	
 };
 

@@ -99,6 +99,7 @@ public:
 	int BuscarApellido(std::string parte_apellido, int pos_desde);
 	/// @brief Buscar un Cliente por apellido y nombre
 	int BuscarApellidoYNombre(std::string parte_apellido, int pos_desde);
+	int BuscarMarcaYNombre(std::string parte, int pos_desde);
 	/// @brief Buscar un Cliente por direccion
 	int BuscarDireccion(std::string parte_direccion, int pos_desde);
 	/// @brief Buscar un Cliente por telefono

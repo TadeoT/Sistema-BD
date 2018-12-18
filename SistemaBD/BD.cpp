@@ -187,7 +187,7 @@ std::string BD::AgregarPedido( Pedido &p){
 
 }
 
-// compara nombre y apellido, sin diferenciar may�sculas y min�sculas
+//----------------BUSQUEDAD DE CLIENTES Y PRODUCTOS -------------------------------
 int BD::BuscarApellidoYNombre(std::string parte, int pos_desde) {
 	pasar_a_minusculas(parte);
 	int cant = CantidadDatos_cliente();
@@ -200,6 +200,20 @@ int BD::BuscarApellidoYNombre(std::string parte, int pos_desde) {
 	}
 	return NO_SE_ENCUENTRA;
 }
+
+int BD::BuscarMarcaYNombre(std::string parte, int pos_desde) {
+	pasar_a_minusculas(parte);
+	int cant = CantidadDatos_producto();
+	for (int i=pos_desde;i<cant;i++) {
+		Producto &p = arregloProducto[i];
+		std::string marcanom = p.VerMarca()+", "+p.VerNombre();
+		pasar_a_minusculas(marcanom);
+		if (marcanom.find(parte,0)!=std::string::npos)
+			return i;
+	}
+	return NO_SE_ENCUENTRA;
+}
+//------------------------------------------------------------------------------------
 
 void BD::OrdenarCliente(CriterioOrdenCliente criterio) {
 	switch (criterio) {

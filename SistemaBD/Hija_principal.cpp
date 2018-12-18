@@ -10,6 +10,8 @@
 #include "Hija_AgregarProducto.h"
 #include <wx/icon.h>
 #include "Hija_VerFacturas.h"
+#include "Hija_ModificarProducto.h"
+#include "string_conv.h"
 using namespace std;
 
 Hija_principal::Hija_principal(BD *BaseDatos) : Base_principal(NULL), m_BaseDatos(BaseDatos)
@@ -59,7 +61,11 @@ void Hija_principal::ClickAgregarProducto( wxCommandEvent& event )  {
 }
 
 void Hija_principal::ClickModificarProducto( wxCommandEvent& event )  {
-	event.Skip();
+	int f = m_grillaProductos->GetGridCursorRow();
+	Hija_ModificarProducto *win= new Hija_ModificarProducto(this,m_BaseDatos,f);
+	if (win->ShowModal()==1){
+		refrescarGrillaProducto();
+	}
 }
 
 void Hija_principal::ClickEliminarProducto( wxCommandEvent& event )  {
@@ -154,4 +160,38 @@ void Hija_principal::ClickMenuVerPedido( wxCommandEvent& event )  {
 void Hija_principal::OnCambiaTamanio( wxSizeEvent& event )  {
 	event.Skip();
 }
+
+void Hija_principal::ClickBuscarCliente( wxCommandEvent& event )  {
+	// buscar desde la fila actual
+	int fila_actual = m_grillaClientes->GetGridCursorRow();
+	if (m_grillaClientes->GetSelectedRows().GetCount()==0) fila_actual=-1;
+	int res=m_BaseDatos->BuscarApellidoYNombre( wx_to_std(m_busquedadCliente->GetValue()), fila_actual+1 );
+	// si no encontro buscar otra vez desde el principio
+	if (res==NO_SE_ENCUENTRA) 
+		res=m_BaseDatos->BuscarApellidoYNombre( wx_to_std(m_busquedadCliente->GetValue()), 0 );
+	if (res==NO_SE_ENCUENTRA) // si no hay ninguna coincidencia
+		wxMessageBox("No se encontraron coincidencias");
+	else {
+		m_grillaClientes->SetGridCursor(res,0); // seleccionar
+		m_grillaClientes->SelectRow(res); // seleccionar
+	}
+}
+
+void Hija_principal::ClickBuscarProducto( wxCommandEvent& event )  {
+	// buscar desde la fila actual
+	int fila_actual = m_grillaClientes->GetGridCursorRow();
+	if (m_grillaProductos->GetSelectedRows().GetCount()==0) fila_actual=-1;
+	int res=m_BaseDatos->BuscarMarcaYNombre( wx_to_std(m_busquedadProducto->GetValue()), fila_actual+1 );
+	// si no encontro buscar otra vez desde el principio
+	if (res==NO_SE_ENCUENTRA) 
+		res=m_BaseDatos->BuscarMarcaYNombre( wx_to_std(m_busquedadProducto->GetValue()), 0 );
+	if (res==NO_SE_ENCUENTRA) // si no hay ninguna coincidencia
+		wxMessageBox("No se encontraron coincidencias");
+	else {
+		m_grillaProductos->SetGridCursor(res,0); // seleccionar
+		m_grillaProductos->SelectRow(res); // seleccionar
+	}
+	
+}
+
 
