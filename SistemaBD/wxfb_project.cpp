@@ -279,10 +279,12 @@ Base_principal::Base_principal( wxWindow* parent, wxWindowID id, const wxString&
 	this->Connect( m_menuItem5->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickAumentoPrecioPorcentaje ) );
 	this->Connect( m_menuItem6->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickAcercaDe ) );
 	m_button10->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickBuscarCliente ), NULL, this );
+	m_grillaClientes->Connect( wxEVT_GRID_CELL_LEFT_DCLICK, wxGridEventHandler( Base_principal::DobleClickClientes ), NULL, this );
 	AgregarCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickAgregarCliente ), NULL, this );
 	ModificarCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickModificarCliente ), NULL, this );
 	EliminarCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickEliminarCliente ), NULL, this );
 	m_button11->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickBuscarProducto ), NULL, this );
+	m_grillaProductos->Connect( wxEVT_GRID_CELL_LEFT_DCLICK, wxGridEventHandler( Base_principal::DobleClickProducto ), NULL, this );
 	AgregarProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickAgregarProducto ), NULL, this );
 	ModificarProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickModificarProducto ), NULL, this );
 	EliminarProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickEliminarProducto ), NULL, this );
@@ -299,10 +301,12 @@ Base_principal::~Base_principal()
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickAumentoPrecioPorcentaje ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( Base_principal::ClickAcercaDe ) );
 	m_button10->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickBuscarCliente ), NULL, this );
+	m_grillaClientes->Disconnect( wxEVT_GRID_CELL_LEFT_DCLICK, wxGridEventHandler( Base_principal::DobleClickClientes ), NULL, this );
 	AgregarCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickAgregarCliente ), NULL, this );
 	ModificarCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickModificarCliente ), NULL, this );
 	EliminarCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickEliminarCliente ), NULL, this );
 	m_button11->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickBuscarProducto ), NULL, this );
+	m_grillaProductos->Disconnect( wxEVT_GRID_CELL_LEFT_DCLICK, wxGridEventHandler( Base_principal::DobleClickProducto ), NULL, this );
 	AgregarProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickAgregarProducto ), NULL, this );
 	ModificarProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickModificarProducto ), NULL, this );
 	EliminarProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_principal::ClickEliminarProducto ), NULL, this );
@@ -1181,6 +1185,7 @@ Base_VerFacturas::Base_VerFacturas( wxWindow* parent, wxWindowID id, const wxStr
 	this->Centre( wxBOTH );
 	
 	// Connect Events
+	m_grillaFacturas->Connect( wxEVT_GRID_CELL_LEFT_DCLICK, wxGridEventHandler( Base_VerFacturas::DobleClickFactura ), NULL, this );
 	m_button18->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_VerFacturas::ClickVerFactura ), NULL, this );
 	m_button19->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_VerFacturas::ClickCerrarVerFacturas ), NULL, this );
 }
@@ -1188,6 +1193,7 @@ Base_VerFacturas::Base_VerFacturas( wxWindow* parent, wxWindowID id, const wxStr
 Base_VerFacturas::~Base_VerFacturas()
 {
 	// Disconnect Events
+	m_grillaFacturas->Disconnect( wxEVT_GRID_CELL_LEFT_DCLICK, wxGridEventHandler( Base_VerFacturas::DobleClickFactura ), NULL, this );
 	m_button18->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_VerFacturas::ClickVerFactura ), NULL, this );
 	m_button19->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( Base_VerFacturas::ClickCerrarVerFacturas ), NULL, this );
 	
@@ -1462,7 +1468,7 @@ Base_VerPagos::Base_VerPagos( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	// Cell Defaults
 	m_grillaPagos->SetDefaultCellFont( wxFont( 10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
-	m_grillaPagos->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	m_grillaPagos->SetDefaultCellAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
 	bSizer93->Add( m_grillaPagos, 1, wxALL|wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer94;

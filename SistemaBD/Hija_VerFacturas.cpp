@@ -39,3 +39,10 @@ void Hija_VerFacturas::ClickCerrarVerFacturas( wxCommandEvent& event )  {
 	Close();
 }
 
+void Hija_VerFacturas::DobleClickFactura( wxGridEvent& event )  {
+	int f =m_BaseDatos->NumeroFacturaAnterior() - m_grillaFacturas->GetGridCursorRow();
+	
+	Hija_VerPedidos nueva_ventana(this,m_BaseDatos,f);
+	nueva_ventana.ShowModal();
+}
+

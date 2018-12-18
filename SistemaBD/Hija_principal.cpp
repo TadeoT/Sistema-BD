@@ -224,3 +224,18 @@ void Hija_principal::ClickAcercaDe( wxCommandEvent& event )  {
 	win->ShowModal();
 }
 
+void Hija_principal::DobleClickClientes( wxGridEvent& event )  {
+	int fila_actual = m_grillaClientes->GetGridCursorRow(); // obtener el indice de persona
+	Hija_ModificarCliente nueva_ventana(this,m_BaseDatos,fila_actual); // crear la ventana
+	if (nueva_ventana.ShowModal()) // mostrar y esperar
+		refrescarGrillaCliente();
+}
+
+void Hija_principal::DobleClickProducto( wxGridEvent& event )  {
+	int fila_actual = m_grillaProductos->GetGridCursorRow();
+	Hija_ModificarProducto nueva_ventana(this,m_BaseDatos,fila_actual);
+	if (nueva_ventana.ShowModal()) 
+		refrescarGrillaProducto();
+}
+
+

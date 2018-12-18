@@ -8,6 +8,8 @@ class Hija_principal : public Base_principal {
 private:
 	
 protected:
+	void DobleClickClientes( wxGridEvent& event )  override;
+	void DobleClickProducto( wxGridEvent& event )  override;
 	void ClickAumentoPrecioPorcentaje( wxCommandEvent& event )  override;
 	void ClickAcercaDe( wxCommandEvent& event )  override;
 	void ClickVerPagos( wxCommandEvent& event )  override;

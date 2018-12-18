@@ -67,10 +67,12 @@ class Base_principal : public wxFrame
 		virtual void ClickAumentoPrecioPorcentaje( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickAcercaDe( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickBuscarCliente( wxCommandEvent& event ) { event.Skip(); }
+		virtual void DobleClickClientes( wxGridEvent& event ) { event.Skip(); }
 		virtual void ClickAgregarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickModificarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickEliminarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickBuscarProducto( wxCommandEvent& event ) { event.Skip(); }
+		virtual void DobleClickProducto( wxGridEvent& event ) { event.Skip(); }
 		virtual void ClickAgregarProducto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickModificarProducto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickEliminarProducto( wxCommandEvent& event ) { event.Skip(); }
@@ -293,6 +295,7 @@ class Base_VerFacturas : public wxDialog
 		wxButton* m_button19;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void DobleClickFactura( wxGridEvent& event ) { event.Skip(); }
 		virtual void ClickVerFactura( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ClickCerrarVerFacturas( wxCommandEvent& event ) { event.Skip(); }
 		
